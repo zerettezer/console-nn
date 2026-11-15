@@ -1,0 +1,5 @@
+C:\src> .\script.ps1
+.\script.ps1 : File C:\Users\user\script.ps1 cannot be loaded because running
+scripts is disabled on this system. For more information, see about_Execution_Policies.
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess

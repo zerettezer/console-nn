@@ -1,0 +1,23 @@
+{
+  "format": 1,
+  "model_dir": "artifacts/cpu/model",
+  "files": {
+    "config.json": {
+      "sha256": "2611d06bfa1dfd6e9d0b42c3e2c0f73f7b15384685a05c3ad73de4c50968d998",
+      "bytes": 3952
+    },
+    "tokenizer.json": {
+      "sha256": "0c838a44ce8b52498a6785ce3be0828873f1994207da4245206eceebeefbe410",
+      "bytes": 41831
+    },
+    "weights.h5": {
+      "sha256": "c966d330e76d35e0f19ea71663c98ff8ac200816efc251dbb913c71390662a87",
+      "bytes": 591472
+    },
+    "model_int8.tflite": {
+      "sha256": "8132222fe44c8558c6cbc5fd3f88e696bada2dd94bc51ab3b9f107b7eacacf54",
+      "bytes": 184712
+    }
+  },
+  "notes": {}
+}

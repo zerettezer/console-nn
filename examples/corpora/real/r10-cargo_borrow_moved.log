@@ -1,0 +1,10 @@
+dmitry@prod-01:~/proj$ cargo build
+   Compiling myapp v0.1.0 (/home/dev/myapp)
+error[E0382]: borrow of moved value: `name`
+ --> src/main.rs:5:20
+  |
+3 |     let name = String::from("bob");
+  |         ---- move occurs because `name` has type `String`
+5 |     println!("{}", name);
+  |                    ^^^^ value borrowed here after move
+error: could not compile `myapp` (bin "myapp") due to 1 previous error

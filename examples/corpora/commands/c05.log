@@ -1,0 +1,7 @@
+ivan@runner-7:~$ rsync -av --dry-run --itemize-changes /srv/app/ backup:/srv/app/
+rsync: [sender] change_dir "/srv/app" failed: No such file or directory (2)
+[INFO] cache directory: /home/test/.cache/app
+loading plugins from /usr/lib/app/plugins
+[INFO] cache directory: /home/ml/.cache/app
+handshake complete
+waiting for lock ... acquired

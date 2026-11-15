@@ -1,0 +1,7 @@
+service@edge-02:~$ terraform init -input=false && terraform plan -out=tfplan
+Error: Error acquiring the state lock
+Lock Info: ID: 8842
+[INFO] using 363 worker threads
+[INFO] cache directory: /home/analyst/.cache/app
+loading plugins from /usr/lib/app/plugins
+[INFO] loading shared libraries

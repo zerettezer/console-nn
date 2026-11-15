@@ -1,0 +1,14 @@
+sam@dev-laptop:~$ go test ./... -race -count=1
+ok   app/cmd/server 2.418s
+ok   app/internal/parser 0.812s
+ok   app/internal/store 1.204s
+monitor: cpu=335% mem=0.1699147117147947GiB
+waiting for lock ... acquired
+transport: tcp
+[INFO] loading shared libraries
+waiting for lock ... acquired
+open file descriptors: 87
+[INFO] reading environment variables
+[INFO] configuration file: /etc/app/config.yaml
+[INFO] processing queue: 483 items
+built bin/app

@@ -1,0 +1,3 @@
+qa@gpu-01:~/proj$ systemctl start myapp
+Job for myapp.service failed because the control process exited with error code.
+See "systemctl status myapp.service" and "journalctl -xeu myapp.service" for details.

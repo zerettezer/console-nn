@@ -1,0 +1,23 @@
+{
+  "format": 1,
+  "model_dir": "artifacts/base/model",
+  "files": {
+    "config.json": {
+      "sha256": "84dd1be0f65b613a9cbf860aee0fadcacae17354385afb3ee6b953e1de6c51d5",
+      "bytes": 3963
+    },
+    "tokenizer.json": {
+      "sha256": "c90ad49349f564f0f6cb549fd95b3c88f0bfe88b482326a95098f9fdcda0a6fc",
+      "bytes": 71766
+    },
+    "weights.h5": {
+      "sha256": "c3f7be3a6d134bd854a4d8310fce1d92ebb9d0037e810e4baeb64186caf3d388",
+      "bytes": 2086968
+    },
+    "model_int8.tflite": {
+      "sha256": "0f3c5b604aafed8540644b20547817f7e982d2dc8423b1a0983132469679960d",
+      "bytes": 613984
+    }
+  },
+  "notes": {}
+}

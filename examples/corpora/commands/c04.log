@@ -1,0 +1,11 @@
+analyst@prod-eu-2:~$ sed -i.bak -E 's/(db|redis)_host=.*/\1_host=10.0.0.14/' config/*.yaml
+updated config/prod.yaml
+updated config/staging.yaml
+server {
+    listen 80;
+    server_name app.internal;
+[INFO] loading shared libraries
+open file descriptors: 461
+handshake complete
+[INFO] reading environment variables
+}

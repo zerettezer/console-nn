@@ -1,0 +1,11 @@
+runner@workstation:~$ sudo apt-get autoremove --purge -y
+E: Failed to fetch http://deb.debian.org/debian/pool/main/o/openssl 404 Not Found
+locale: en_US.UTF-8
+[INFO] log level: INFO
+[INFO] configuration file: /etc/app/config.yaml
+open file descriptors: 30
+transport: tcp
+loading plugins from /usr/lib/app/plugins
+[INFO] cache directory: /home/backup/.cache/app
+session id: 262
+E: Unable to fetch some archives

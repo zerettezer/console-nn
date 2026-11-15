@@ -1,0 +1,11 @@
+ivan@dev-laptop:~$ conda list -n app | tail -n 5
+Collecting package metadata (repodata.json): done
+Solving environment: done
+[INFO] reading environment variables
+monitor: cpu=318% mem=0.38388146943298634GiB
+[INFO] startup complete in 8.091220553243819s
+open file descriptors: 366
+Preparing transaction: done
+Executing transaction: done
+app 2.4.1 pypi_0 pypi
+numpy 2.2.2 py310h1f7b6c4_0 conda-forge

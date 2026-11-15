@@ -1,0 +1,27 @@
+$ python -m pytest tests/ -q
+============================= test session starts =============================
+platform linux -- Python 3.11.9, pytest-8.2.0, pluggy-1.5.0
+rootdir: /home/dev/proj
+configfile: pyproject.toml
+plugins: cov-5.0.0, xdist-3.6.1
+collected 128 items
+
+tests/test_api.py ....................F...                               [ 19%]
+tests/test_model.py .................................................... [ 62%]
+tests/test_parse.py ......................................               [ 92%]
+tests/test_io.py .........                                               [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_parse_response ____________________________
+
+    def test_parse_response():
+        payload = load_fixture("response.json")
+        result = parse_response(payload)
+>       assert result["status"] == "ok"
+E       AssertionError: assert 'error' == 'ok'
+E        +  where 'error' = parse_response(... )['status']
+
+tests/test_api.py:84: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_api.py::test_parse_response - AssertionError: assert 'error' == 'ok'
+========================= 1 failed, 127 passed in 12.48s =======================

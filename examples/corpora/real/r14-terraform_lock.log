@@ -1,0 +1,9 @@
+sre@gpu-01:~/proj$ terraform apply
+╷
+│ Error: Error acquiring the state lock
+│ Error message: resource temporarily unavailable
+│ Lock Info:
+│   ID:        6f1c2a3e-8d4b-1c9a-7e55-0a4f3b2d9c11
+│   Path:      terraform.tfstate
+│   Operation: OperationTypeApply
+╵

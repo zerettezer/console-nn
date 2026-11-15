@@ -1,0 +1,7 @@
+C:\src> npm run build
+> app@1.0.0 build
+> webpack --mode production
+Error: error:0308010C:digital envelope routines::unsupported
+    at new Hash (node:internal/crypto/hash:79:19)
+  opensslErrorStack: [ 'error:03000086:digital envelope routines::initialization error' ],
+  code: 'ERR_OSSL_EVP_UNSUPPORTED'

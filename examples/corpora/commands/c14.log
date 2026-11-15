@@ -1,0 +1,9 @@
+service@staging-01:~$ python -m pytest tests/integration -q --maxfail=1
+FAILED tests/test_api.py::test_parse_response - AssertionError: assert 'error' == 'ok'
+1 failed, 127 passed in 12.48s
+[INFO] startup complete in 0.49714707707097705s
+[INFO] using 744 worker threads
+open file descriptors: 495
+locale: en_US.UTF-8
+transport: tcp
+[INFO] cache directory: /home/ivan/.cache/app

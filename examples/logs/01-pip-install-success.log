@@ -1,0 +1,20 @@
+$ python -m pip install --upgrade numpy pandas scipy
+Requirement already satisfied: numpy in /usr/lib/python3.10/site-packages (1.24.4)
+Collecting numpy
+  Downloading numpy-2.2.2-cp310-cp310-manylinux_2_17_x86_64.whl (16.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.2/16.2 MB 42.1 MB/s eta 0:00:00
+Collecting pandas
+  Downloading pandas-2.2.3-cp310-cp310-manylinux_2_17_x86_64.whl (12.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.6/12.6 MB 38.2 MB/s eta 0:00:00
+Collecting scipy
+  Downloading scipy-1.14.1-cp310-cp310-manylinux_2_17_x86_64.whl (40.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.3/40.3 MB 41.7 MB/s eta 0:00:00
+Requirement already satisfied: python-dateutil>=2.8.2 in /usr/lib/python3.10/site-packages (2.8.2)
+Requirement already satisfied: pytz>=2020.1 in /usr/lib/python3.10/site-packages (2024.1)
+Requirement already satisfied: tzdata>=2022.7 in /usr/lib/python3.10/site-packages (2024.1)
+Installing collected packages: scipy, numpy, pandas
+  Attempting uninstall: numpy
+    Found existing installation: numpy 1.24.4
+    Uninstalling numpy-1.24.4:
+      Successfully uninstalled numpy-1.24.4
+Successfully installed numpy-2.2.2 pandas-2.2.3 scipy-1.14.1

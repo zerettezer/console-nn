@@ -1,0 +1,5 @@
+PS C:\src> Get-Content C:\logs\app.log
+Get-Content : Cannot find path 'C:\logs\app.log' because it does not exist.
+At line:1 char:1
+    + CategoryInfo          : ObjectNotFound: (C:\logs\app.log:String)
+    + FullyQualifiedErrorId : PathNotFound

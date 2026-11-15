@@ -1,0 +1,10 @@
+anna@workstation:~$ kubectl -n prod rollout status deployment/app --timeout=120s && kubectl -n prod logs deploy/app --tail=20
+deployment "app" successfully rolled out
+2026-11-06T10:14:22Z INFO starting worker
+[INFO] log level: INFO
+monitor: cpu=337% mem=6.813246624935489GiB
+[INFO] startup complete in 7.349925357845305s
+loading plugins from /usr/lib/app/plugins
+2026-11-06T10:14:23Z INFO connected to database
+NAME                   READY   STATUS    RESTARTS
+app-7d9f8c6b5-2xk4p   1/1     Running   0

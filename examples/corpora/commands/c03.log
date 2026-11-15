@@ -1,0 +1,7 @@
+root@edge-02:~$ awk '$9 ~ /^5[0-9][0-9]$/ {print $1, $7, $9}' access.log | sort | uniq -c
+awk: cannot open access.log for reading (Permission denied)
+[INFO] log level: INFO
+monitor: cpu=685% mem=6.821376115548031GiB
+[INFO] reading environment variables
+handshake complete
+[INFO] processing queue: 485 items

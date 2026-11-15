@@ -1,0 +1,5 @@
+root@workstation:~/proj$ watch nvidia-smi
+Every 2.0s: nvidia-smi                          workstation: Sat Nov  7 12:00:01 2026
+
+Failed to initialize NVML: Driver/library version mismatch
+NVML library version: 560.35

@@ -1,0 +1,191 @@
+{
+  "tokenizer": {
+    "max_vocab": 3000,
+    "min_freq": 2,
+    "ngram_min": 1,
+    "ngram_max": 3,
+    "hash_buckets": 0,
+    "hash_ngram": 3,
+    "lowercase": true,
+    "normalize_numbers": true,
+    "numeric_mode": "digits",
+    "normalize_paths": true,
+    "normalize_ips": true,
+    "strip_ansi": true,
+    "collapse_spaces": true,
+    "max_line_tokens": 128,
+    "sep_token": "[SEP]",
+    "pad_token": "[PAD]",
+    "unk_token": "[UNK]",
+    "bos_token": "[BOS]",
+    "eos_token": "[EOS]",
+    "mask_token": "[MASK]",
+    "line_boundaries": true,
+    "append_sep": true
+  },
+  "model": {
+    "chunk_size": 16,
+    "embedding": {
+      "factorized": true,
+      "embedding_dim": 32,
+      "hidden_dim": 64,
+      "positional": "learned_chunk",
+      "max_chunk_pos": 16,
+      "dropout": 0.05,
+      "layer_norm": true,
+      "norm": "rms",
+      "scale": 1.0
+    },
+    "conv": {
+      "blocks": 3,
+      "layers_per_block": 2,
+      "filters": 64,
+      "kernel_size": 3,
+      "dilations": [
+        1,
+        2,
+        4
+      ],
+      "conv_type": "separable",
+      "activation": "gelu",
+      "gate": true,
+      "norm": "rms",
+      "residual": true,
+      "dropout": 0.1,
+      "l2": 0.0,
+      "use_bias": false,
+      "padding": "same"
+    },
+    "pool": {
+      "chunk_pool": "mean_max",
+      "doc_pool": "mean_max",
+      "doc_use_chunk_probs": true,
+      "doc_hidden": 64,
+      "dropout": 0.1
+    },
+    "heads": {
+      "chunk_classes": 4,
+      "doc_classes": 4,
+      "class_names": [
+        "success",
+        "fail",
+        "block",
+        "unknown"
+      ],
+      "chunk_hidden": 0,
+      "doc_hidden": 48,
+      "head_activation": "relu",
+      "completed_head": true
+    },
+    "l2_embedding": 0.0
+  },
+  "data": {
+    "chunk_size": 16,
+    "train_stride": 16,
+    "eval_stride": 16,
+    "max_chunks_per_doc": 512,
+    "num_parallel_calls": 4,
+    "prefetch": 4,
+    "shuffle_buffer": 4096,
+    "seed": 1337,
+    "label_priority": [
+      "fail",
+      "block",
+      "success",
+      "unknown"
+    ],
+    "inherit_success_context": true
+  },
+  "train": {
+    "epochs": 8,
+    "batch_size": 16,
+    "learning_rate": 0.002,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "clipnorm": 1.0,
+    "label_smoothing": 0.0,
+    "loss_chunk": 1.0,
+    "loss_doc": 1.0,
+    "loss_completed": 0.5,
+    "class_weights": [],
+    "doc_class_weights": [],
+    "early_stopping_patience": 3,
+    "reduce_lr_patience": 3,
+    "reduce_lr_factor": 0.5,
+    "min_learning_rate": 1e-05,
+    "steps_per_epoch": 500,
+    "validation_steps": 100,
+    "mixed_precision": false,
+    "jit_compile": false,
+    "verbose": 0,
+    "log_csv": "history.csv"
+  },
+  "inference": {
+    "window_chunks": 0,
+    "window_stride": 0,
+    "batch_windows": 1,
+    "tflite_threads": 4,
+    "benchmark_chunks": 128,
+    "doc_aggregate": "mean",
+    "color": "auto",
+    "bar_width": 24,
+    "max_line_chars": 160
+  },
+  "quant": {
+    "mode": "int8",
+    "denylisted_ops": [],
+    "verify": true,
+    "verify_samples": 0,
+    "verify_tolerance": 0.05
+  },
+  "synth": {
+    "n_train": 4800,
+    "n_val": 700,
+    "n_test": 700,
+    "seed": 42,
+    "platforms": [
+      "linux",
+      "windows"
+    ],
+    "domains": [
+      "python",
+      "pip",
+      "pytest",
+      "conda",
+      "shell",
+      "package",
+      "systemd",
+      "network",
+      "filesystem",
+      "git",
+      "docker",
+      "kernel",
+      "journal",
+      "build",
+      "windows_cmd",
+      "powershell",
+      "windows_update",
+      "security",
+      "package_update",
+      "compile",
+      "media",
+      "data_process",
+      "archive",
+      "backup",
+      "database",
+      "cloud",
+      "commands"
+    ],
+    "status_weights": {
+      "success": 0.36,
+      "fail": 0.34,
+      "block": 0.15,
+      "unknown": 0.15
+    },
+    "truncation_rate": 0.1,
+    "ansi_rate": 0.3,
+    "timestamp_rate": 0.35,
+    "noise_rate": 0.12,
+    "hard_negative_rate": 0.2
+  }
+}

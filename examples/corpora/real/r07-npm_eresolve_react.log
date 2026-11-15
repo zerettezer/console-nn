@@ -1,0 +1,11 @@
+jenkins@lab-pc:~/proj$ npm install
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error While resolving: react-scripts@5.0.1
+npm error Found: typescript@5.6.3
+npm error node_modules/typescript
+npm error   peerOptional typescript@"*" from react-scripts@5.0.1
+npm error Could not resolve dependency:
+npm error peerOptional typescript@"^3.2.1 || ^4" from react-scripts@5.0.1
+npm error Fix the upstream dependency conflict, or retry
+npm error this command with --force or --legacy-peer-deps

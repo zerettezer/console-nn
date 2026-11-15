@@ -1,0 +1,4 @@
+deploy@srv-edge:~/proj$ sudo apt install nginx
+Reading package lists... Done
+Building dependency tree... Done
+E: Unable to locate package nginx

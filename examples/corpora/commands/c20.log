@@ -1,0 +1,11 @@
+sre@cache-02:~$ systemctl status app.service --no-pager
+Job for app.service failed because the control process exited with error code.
+See "systemctl status app.service" for details.
+[INFO] configuration file: /etc/app/config.yaml
+handshake complete
+[INFO] using 286 worker threads
+[INFO] configuration file: /etc/app/config.yaml
+[INFO] cache directory: /home/runner/.cache/app
+[INFO] processing queue: 508 items
+transport: tcp
+[INFO] using 249 worker threads

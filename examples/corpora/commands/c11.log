@@ -1,0 +1,11 @@
+ops@runner-7:~$ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build -j && ctest --test-dir build --output-on-failure
+CMake Error at CMakeLists.txt:12 (find_package): Could not find OpenCV
+make: *** [Makefile:24: all] Error 1
+[INFO] processing queue: 130 items
+handshake complete
+[INFO] using 391 worker threads
+[INFO] log level: INFO
+[INFO] log level: INFO
+waiting for lock ... acquired
+[INFO] using 828 worker threads
+monitor: cpu=772% mem=5.962353919090113GiB

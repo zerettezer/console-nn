@@ -1,0 +1,11 @@
+katya@buildbox:~$ python -m pip wheel . -w dist/ --no-deps && python -m pip install --force-reinstall dist/app-*.whl
+ERROR: Could not install packages due to an OSError: [Errno 13] Permission denied: '/usr/lib/python3.10/site-packages'
+[INFO] loading shared libraries
+[INFO] configuration file: /etc/app/config.yaml
+session id: 725
+monitor: cpu=352% mem=7.752305206036604GiB
+transport: tcp
+handshake complete
+[INFO] startup complete in 5.6558691812361666s
+handshake complete
+loading plugins from /usr/lib/app/plugins

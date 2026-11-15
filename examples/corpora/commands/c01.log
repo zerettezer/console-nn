@@ -1,0 +1,16 @@
+ml@workstation:~$ grep -RIn --include='*.py' 'TODO' src/ | xargs -r wc -l
+src/main.py:18:# TODO: retry policy
+src/io.py:64:# TODO: handle EOF
+src/tasks.py:122:# TODO: metrics
+  3 total
+handshake complete
+monitor: cpu=357% mem=8.81941200927044GiB
+session id: 764
+locale: en_US.UTF-8
+open file descriptors: 469
+open file descriptors: 26
+transport: tcp
+handshake complete
+handshake complete
+     12 app/api.py:88: deprecated call
+      4 app/db.py:31: deprecated

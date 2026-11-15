@@ -1,0 +1,7 @@
+test@edge-02:~$ docker compose -f compose.prod.yml build --pull && docker compose up -d
+Error response from daemon: pull access denied for registry/app, may require 'docker login'
+[INFO] reading environment variables
+[INFO] configuration file: /etc/app/config.yaml
+monitor: cpu=809% mem=2.7010891886751653GiB
+[INFO] reading environment variables
+transport: tcp

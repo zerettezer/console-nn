@@ -1,0 +1,12 @@
+nightly@ci-node-4:~$ find /srv/app -type f -size +100M -printf '%s %p
+' | sort -rn | head
+find: '/var/log': No such file or directory
+monitor: cpu=574% mem=3.6247020530781726GiB
+handshake complete
+[INFO] startup complete in 7.488259578262515s
+[INFO] configuration file: /etc/app/config.yaml
+waiting for lock ... acquired
+transport: tcp
+waiting for lock ... acquired
+loading plugins from /usr/lib/app/plugins
+open file descriptors: 325

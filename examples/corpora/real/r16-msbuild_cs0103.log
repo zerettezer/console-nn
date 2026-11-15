@@ -1,0 +1,7 @@
+C:\src> msbuild App.sln
+Microsoft (R) Build Engine version 17.11.9+a69bbaaf5 for .NET Framework
+Build started 07.11.2026 12:00:01.
+Program.cs(14,21): error CS0103: The name 'userName' does not exist in the current context
+Build FAILED.
+    0 Warning(s)
+    1 Error(s)

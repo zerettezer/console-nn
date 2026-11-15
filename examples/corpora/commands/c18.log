@@ -1,0 +1,11 @@
+runner@buildbox:~$ psql "$DATABASE_URL" -c 'SELECT count(*) FROM orders WHERE created_at > now() - interval \'1 day\';
+ERROR:  permission denied for table orders
+locale: en_US.UTF-8
+[INFO] using 473 worker threads
+[INFO] log level: INFO
+[INFO] using 605 worker threads
+waiting for lock ... acquired
+waiting for lock ... acquired
+[INFO] reading environment variables
+session id: 95
+[INFO] loading shared libraries

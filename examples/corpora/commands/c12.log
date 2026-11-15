@@ -1,0 +1,9 @@
+ml@runner-7:~$ cargo clippy --all-targets -- -D warnings
+error: failed to write to /usr/local/cargo/registry: Permission denied
+monitor: cpu=337% mem=7.522458249028297GiB
+monitor: cpu=862% mem=7.802370363068564GiB
+[INFO] reading environment variables
+locale: en_US.UTF-8
+monitor: cpu=301% mem=5.173751945108137GiB
+session id: 410
+locale: en_US.UTF-8

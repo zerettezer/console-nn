@@ -1,0 +1,6 @@
+test@edge-02:~$ tar -czf release.tgz build/ && sha256sum release.tgz
+tar: release.tgz: Cannot open: Permission denied
+monitor: cpu=570% mem=6.763703702067533GiB
+[INFO] startup complete in 2.6593540798116786s
+[INFO] reading environment variables
+loading plugins from /usr/lib/app/plugins

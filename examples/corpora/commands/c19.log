@@ -1,0 +1,14 @@
+ci@ci-node-4:~$ ffmpeg -i output.mp4 -f null - 2>&1 | tail -n 3
+h264,1920,1080
+aac,0,0
+frame= 2504 fps=30 q=23.0 size=11264kB time=00:01:23.45
+video:10932kB audio:1284kB muxing overhead: 0.421%
+session id: 495
+[INFO] startup complete in 6.5748480444851225s
+waiting for lock ... acquired
+locale: en_US.UTF-8
+[INFO] loading shared libraries
+[INFO] cache directory: /home/sre/.cache/app
+[INFO] startup complete in 0.6930672719061187s
+waiting for lock ... acquired
+frame= 2504 fps=30 speed=1.00x

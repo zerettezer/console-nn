@@ -1,0 +1,14 @@
+analyst@build-07:~/proj$ pytest
+============================= test session starts ==============================
+collected 3 items
+tests/test_api.py .F.                                                    [100%]
+=================================== FAILURES ===================================
+______________________________ test_get_user ___________________________________
+    def test_get_user():
+>       assert get_user(1)["name"] == "Bob"
+E       AssertionError: assert 'Alice' == 'Bob'
+E         - Bob
+E         + Alice
+tests/test_api.py:12: AssertionError
+FAILED tests/test_api.py::test_get_user - AssertionError: assert 'Alice' == 'Bob'
+========================= 1 failed, 2 passed in 0.14s ==========================

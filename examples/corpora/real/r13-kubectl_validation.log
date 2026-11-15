@@ -1,0 +1,4 @@
+maria@build-07:~/proj$ kubectl apply -f deploy.yaml
+error: error validating "deploy.yaml": error validating data: ValidationError(Deployment.spec):
+missing required field "selector" in io.k8s.api.apps.v1.DeploymentSpec;
+if you choose to ignore these errors, turn validation off with --validate=false
