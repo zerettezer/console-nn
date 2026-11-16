@@ -1,0 +1,955 @@
+## Linux
+
+`gcc -c main.c`
+```
+main.c: In function 'main':
+main.c:7:5: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+    7 |     strlen(s);
+      |     ^~~~~~
+main.c:1:1: note: include '<string.h>' or provide a declaration of 'strlen'
+main.c:9:1: error: expected ';' before '}' token
+    9 | }
+      | ^
+```
+
+`make`
+```
+make: *** No rule to make target 'main.o', needed by 'app'.  Stop.
+```
+
+`make`
+```
+Makefile:6: *** missing separator.  Stop.
+```
+
+`ninja`
+```
+ninja: error: loading 'build.ninja': No such file or directory
+```
+
+`apt update`
+```
+Err:1 http://archive.ubuntu.com/ubuntu noble InRelease
+  Temporary failure resolving 'archive.ubuntu.com'
+W: Failed to fetch http://archive.ubuntu.com/ubuntu/dists/noble/InRelease  Temporary failure resolving 'archive.ubuntu.com'
+W: Some index files failed to download. They have been ignored, or old ones used instead.
+```
+
+`sudo apt install ./app.deb`
+```
+Reading package lists... Done
+Building dependency tree... Done
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created.
+
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ app : Depends: libssl1.1 but it is not installable
+E: Unable to correct problems, you have held broken packages.
+```
+
+`sudo dpkg -i app.deb`
+```
+dpkg: error: dpkg frontend lock was locked by another process with pid 2314
+Note: removing the lock file is always wrong, and can end up damaging the
+locked area and the entire system. See https://wiki.debian.org/Teams/Dpkg/FAQ#db-lock
+```
+
+`npm start`
+```
+> app@1.0.0 start
+> node server.js
+
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen] (node:net:1904:16)
+    at listenInCluster (node:net:1961:12)
+  code: 'EADDRINUSE',
+  errno: -98,
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+```
+
+`npm install -g typescript`
+```
+npm error code EACCES
+npm error syscall mkdir
+npm error path /usr/lib/node_modules/typescript
+npm error errno -13
+npm error Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/typescript'
+npm error The operation was rejected by your operating system.
+```
+
+`node app.js`
+```
+node:internal/modules/cjs/loader:1228
+  throw err;
+  ^
+
+Error: Cannot find module '/home/dev/app.js'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v22.11.0
+```
+
+`node app.js`
+```
+/home/dev/app.js:1
+import express from 'express';
+^^^^^^
+
+SyntaxError: Cannot use import statement outside a module
+    at wrapSafe (node:internal/modules/cjs/loader:1469:18)
+```
+
+`python3 app.py`
+```
+  File "/home/dev/app.py", line 4
+    print("hello"
+                 ^
+SyntaxError: '(' was never closed
+```
+
+`python3 app.py`
+```
+Traceback (most recent call last):
+  File "/home/dev/app.py", line 5, in <module>
+    print(data["name"])
+          ~~~~^^^^^^^^
+KeyError: 'name'
+```
+
+`python3 app.py`
+```
+Traceback (most recent call last):
+  File "/home/dev/app.py", line 2, in <module>
+    with open("config.txt") as f:
+         ^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'config.txt'
+```
+
+`python3 -m venv venv`
+```
+The virtual environment was not created successfully because ensurepip is not
+available.  On Debian/Ubuntu systems, you need to install the python3-venv
+package using the following command.
+
+    apt install python3.12-venv
+
+You may need to use that option (--without-pip) to bypass this error.
+Error: Command '['/home/dev/venv/bin/python3', '-m', 'ensurepip', '--', 'default-pip']' returned non-zero exit status 1.
+```
+
+`pip install torch`
+```
+ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device
+```
+
+`df -h && touch test.txt`
+```
+touch: cannot touch 'test.txt': No space left on device
+```
+
+`cp big.iso /mnt/usb/`
+```
+cp: error writing '/mnt/usb/big.iso': File too large
+```
+
+`rm file.txt`
+```
+rm: cannot remove 'file.txt': Operation not permitted
+```
+
+`cd /root`
+```
+bash: cd: /root: Permission denied
+```
+
+`foo`
+```
+Command 'foo' not found, did you mean:
+  command 'fop' from deb fop (1:2.9-2)
+Try: sudo apt install <deb name>
+```
+
+`ping google.com`
+```
+ping: google.com: Temporary failure in name resolution
+```
+
+`ssh user@host`
+```
+user@host: Permission denied (publickey,password).
+```
+
+`ssh user@host`
+```
+ssh: connect to host host port 22: Connection refused
+```
+
+`scp file.txt user@host:/tmp`
+```
+scp: /tmp/file.txt: Permission denied
+```
+
+`rsync -av src/ user@host:/data/`
+```
+rsync: [receiver] mkdir "/data/src" failed: Permission denied (13)
+rsync error: error in file IO (code 11) at main.c(681) [Receiver=3.2.7]
+```
+
+`curl http://localhost:5000/api`
+```
+curl: (7) Failed to connect to localhost port 5000 after 0 ms: Couldn't connect to server
+```
+
+`docker exec -it web bash`
+```
+Error response from daemon: Container 4f2a1b3c is not running
+```
+
+`docker pull myimage`
+```
+Error response from daemon: pull access denied for myimage, repository does not exist or may require 'docker login'
+```
+
+`docker compose up`
+```
+yaml: line 7: mapping values are not allowed in this context
+```
+
+`kubectl apply -f pod.yaml`
+```
+Error from server (Forbidden): pods is forbidden: User "dev" cannot create resource "pods" in API group "" in the namespace "default"
+```
+
+`helm install app ./chart`
+```
+Error: INSTALLATION FAILED: cannot re-use a name that is still in use
+```
+
+`psql -U postgres`
+```
+psql: error: connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
+```
+
+`mysql -u root -p`
+```
+ERROR 1698 (28000): Access denied for user 'root'@'localhost'
+```
+
+`systemctl start nginx`
+```
+Job for nginx.service failed because the control process exited with error code.
+See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
+```
+```
+nginx[1234]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+```
+
+`crontab -e`
+```
+crontab: installing new crontab
+"/tmp/crontab.Xk3f":5: bad minute
+errors in crontab file, can't install.
+```
+
+`tar xzf archive.tar.gz`
+```
+gzip: stdin: not in gzip format
+tar: Child returned status 1
+tar: Error is not recoverable: exiting now
+```
+
+`unzip file.zip`
+```
+Archive:  file.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.
+```
+
+`git push`
+```
+fatal: The current branch feature has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin feature
+```
+
+`git checkout dev`
+```
+error: pathspec 'dev' did not match any file(s) known to git
+```
+
+`git rebase main`
+```
+Auto-merging src/app.py
+CONFLICT (content): Merge conflict in src/app.py
+error: could not apply 3f2a1b9... add feature
+hint: Resolve all conflicts manually, mark them as resolved with
+hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+```
+
+`cargo run`
+```
+error[E0308]: mismatched types
+ --> src/main.rs:3:18
+  |
+3 |     let x: i32 = "5";
+  |            ---   ^^^ expected `i32`, found `&str`
+  |            |
+  |            expected due to this
+```
+
+`go run main.go`
+```
+main.go:3:8: no required module provides package github.com/gin-gonic/gin; to add it:
+	go get github.com/gin-gonic/gin
+```
+
+`java App`
+```
+Error: Could not find or load main class App
+Caused by: java.lang.ClassNotFoundException: App
+```
+
+`javac App.java`
+```
+App.java:5: error: ';' expected
+        int x = 5
+                 ^
+1 error
+```
+
+## Windows
+
+`cmd`: `foo`
+```
+'foo' is not recognized as an internal or external command,
+operable program or batch file.
+```
+
+`git clone https://github.com/user/repo.git`
+```
+fatal: unable to access 'https://github.com/user/repo.git/': Could not resolve host: github.com
+```
+
+`node app.js`
+```
+node:internal/modules/cjs/loader:1228
+  throw err;
+  ^
+
+Error: Cannot find module 'C:\Users\user\app.js'
+  code: 'MODULE_NOT_FOUND'
+```
+
+`npm start`
+```
+Error: listen EADDRINUSE: address already in use :::3000
+```
+
+`npm install`
+```
+npm error code ENOENT
+npm error syscall open
+npm error path C:\Users\user\app\package.json
+npm error errno -4058
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory
+```
+
+`pip install -r requirements.txt`
+```
+ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirements.txt'
+```
+
+`pip install pandas`
+```
+ERROR: Could not install packages due to an OSError: [WinError 5] Access is denied: 'C:\\Python312\\Lib\\site-packages\\numpy'
+Consider using the `--user` option or check the permissions.
+```
+
+`python -m venv venv`
+```
+Error: Command '['C:\\src\\venv\\Scripts\\python.exe', '-m', 'ensurepip', '--upgrade', '--default-pip']' returned non-zero exit status 101.
+```
+
+`.\venv\Scripts\activate`
+```
+.\venv\Scripts\activate : File C:\src\venv\Scripts\Activate.ps1 cannot be loaded because running scripts is disabled on this system.
+```
+
+`dotnet run`
+```
+Couldn't find a project to run. Ensure a project exists in C:\src, or pass the path to the project using --project.
+```
+
+`dotnet build`
+```
+Program.cs(8,13): error CS0246: The type or namespace name 'JsonConvert' could not be found (are you missing a using directive or an assembly reference?) [C:\src\App\App.csproj]
+```
+
+`msbuild`
+```
+MSBUILD : error MSB1003: Specify a project or solution file. The current working directory does not contain a project or solution file.
+```
+
+`cl main.cpp`
+```
+main.cpp(1): fatal error C1083: Cannot open include file: 'windows.h': No such file or directory
+```
+
+`cmake ..`
+```
+CMake Error: CMake was unable to find a build program corresponding to "Ninja".  CMAKE_MAKE_PROGRAM is not set.  You probably need to select a different build tool.
+-- Configuring incomplete, errors occurred!
+```
+
+`Get-ChildItem Z:\`
+```
+Get-ChildItem : Cannot find drive. A drive with the name 'Z' does not exist.
+```
+
+`Copy-Item a.txt D:\b.txt`
+```
+Copy-Item : There is not enough space on the disk.
+```
+
+`Remove-Item file.txt`
+```
+Remove-Item : Cannot remove item C:\src\file.txt: The process cannot access the file 'file.txt' because it is being used by another process.
+```
+
+`mkdir C:\Program Files\app`
+```
+A subdirectory or file Files\app already exists.
+The syntax of the command is incorrect.
+```
+
+`copy a.txt b.txt`
+```
+The system cannot find the file specified.
+        0 file(s) copied.
+```
+
+`ping google.com`
+```
+Ping request could not find host google.com. Please check the name and try again.
+```
+
+`net use Z: \\server\share`
+```
+System error 53 has occurred.
+
+The network path was not found.
+```
+
+`netstat -ano | findstr :3000`
+```
+(no output, port is free or the process runs under another user)
+```
+
+`taskkill /PID 4812`
+```
+ERROR: The process with PID 4812 could not be terminated.
+Reason: This process can only be terminated forcefully (with /F option).
+```
+
+`reg add HKLM\Software\App /v Key /d 1`
+```
+ERROR: Access is denied.
+```
+
+`schtasks /run /tn MyTask`
+```
+ERROR: The system cannot find the file specified.
+```
+
+`docker compose up`
+```
+error during connect: in the default daemon configuration on Windows, the docker client must be run with elevated privileges to connect: Post "http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.24/containers/create": open //./pipe/docker_engine: Access is denied.
+```
+
+`winget upgrade --all`
+```
+No installed package found matching input criteria.
+```
+
+`wsl -d Ubuntu`
+```
+There is no distribution with the supplied name.
+Error code: Wsl/Service/WSL_E_DISTRO_NOT_FOUND
+```
+
+`Set-ExecutionPolicy RemoteSigned`
+```
+Set-ExecutionPolicy : Access to the registry key 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell' is denied. To change the execution policy for the default (LocalMachine) scope, start Windows PowerShell with the "Run as administrator" option.
+```
+
+## Linux
+
+`yt-dlp https://youtube.com/watch?v=xxxx`
+```
+[youtube] Extracting URL: https://youtube.com/watch?v=xxxx
+[youtube] xxxx: Downloading webpage
+WARNING: [youtube] No supported JavaScript runtime could be found. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing.
+ERROR: [youtube] xxxx: Sign in to confirm you're not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies.
+```
+
+`yt-dlp URL`
+```
+ERROR: [youtube] xxxx: Video unavailable. This video is not available in your country
+```
+
+`yt-dlp -x --audio-format mp3 URL`
+```
+ERROR: Postprocessing: ffprobe and ffmpeg not found. Please install or provide the path using --ffmpeg-location
+```
+
+`yt-dlp URL`
+```
+ERROR: [generic] Unable to download webpage: HTTP Error 403: Forbidden (caused by <HTTPError 403: Forbidden>)
+```
+
+`yt-dlp URL`
+```
+ERROR: unable to download video data: HTTP Error 403: Forbidden
+```
+
+`ffmpeg -i in.mp4 out.mkv`
+```
+in.mp4: No such file or directory
+```
+
+`ffmpeg -i in.mp4 -c:v libx265 out.mp4`
+```
+Unknown encoder 'libx265'
+[vost#0:0 @ 0x5581] Error selecting an encoder
+Error opening output file out.mp4.
+Error opening output files: Encoder not found
+```
+
+`ffmpeg -i in.mp4 out.mp4`
+```
+File 'out.mp4' already exists. Overwrite? [y/N] Not overwriting - exiting
+```
+
+`ffmpeg -i in.webm -c copy out.mp4`
+```
+[mp4 @ 0x55d1] Could not find tag for codec vp9 in stream #0, codec not currently supported in container
+Could not write header for output file #0 (incorrect codec parameters ?): Invalid argument
+Error initializing output stream 0:0 --
+```
+
+`ffmpeg -i broken.mp4 out.mp4`
+```
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5612] moov atom not found
+broken.mp4: Invalid data found when processing input
+```
+
+`wget https://example.com/file.zip`
+```
+--2026-11-07 12:00:01--  https://example.com/file.zip
+Resolving example.com (example.com)... 93.184.216.34
+Connecting to example.com (example.com)|93.184.216.34|:443... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2026-11-07 12:00:02 ERROR 404: Not Found.
+```
+
+`wget https://self-signed.local/file`
+```
+ERROR: cannot verify self-signed.local's certificate, issued by 'CN=local-ca':
+  Unable to locally verify the issuer's authority.
+To connect to self-signed.local insecurely, use `--no-check-certificate'.
+```
+
+`aria2c URL`
+```
+01/07 12:00:01 [ERROR] CUID#7 - Download aborted. URI=https://example.com/file.iso
+Exception: [AbstractCommand.cc:351] errorCode=24 URI=https://example.com/file.iso
+  -> [HttpSkipResponseCommand.cc:239] errorCode=24 Authorization failed.
+```
+
+`rclone copy remote:dir ./dir`
+```
+2026/11/07 12:00:01 Failed to create file system for "remote:dir": didn't find section in config file
+```
+
+`rclone sync ./dir gdrive:backup`
+```
+2026/11/07 12:00:05 ERROR : file.bin: Failed to copy: googleapi: Error 403: The user's Drive storage quota has been exceeded., storageQuotaExceeded
+```
+
+`pipx install yt-dlp`
+```
+bash: pipx: command not found
+```
+
+`pipx install foo`
+```
+Fatal error from pip prepare environment
+ERROR: Could not find a version that satisfies the requirement foo (from versions: none)
+ERROR: No matching distribution found for foo
+```
+
+`conda install numpy`
+```
+Collecting package metadata (current_repodata.json): done
+Solving environment: failed with initial frozen solve. Retrying with flexible solve.
+
+PackagesNotFoundError: The following packages are not available from current channels:
+
+  - numpyy
+
+Current channels:
+  - https://repo.anaconda.com/pkgs/main/linux-64
+```
+
+`conda activate myenv`
+```
+CondaError: Run 'conda init' before 'conda activate'
+```
+
+`jupyter notebook`
+```
+Traceback (most recent call last):
+  File "/usr/local/bin/jupyter-notebook", line 5, in <module>
+    from notebook.app import main
+ModuleNotFoundError: No module named 'notebook'
+```
+
+`ollama run llama3`
+```
+Error: could not connect to ollama app, is it running?
+```
+
+`ollama run llama3:70b`
+```
+Error: model requires more system memory (42.5 GiB) than is available (15.6 GiB)
+```
+
+`whisper audio.mp3`
+```
+Traceback (most recent call last):
+  File "/home/dev/.local/lib/python3.12/site-packages/whisper/audio.py", line 58, in load_audio
+    out = run(cmd, capture_output=True, check=True).stdout
+FileNotFoundError: [Errno 2] No such file or directory: 'ffmpeg'
+```
+
+`python3 train.py`
+```
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.00 GiB. GPU 0 has a total capacity of 7.78 GiB of which 1.12 GiB is free.
+```
+
+`python3 -c "import torch; print(torch.cuda.is_available())"`
+```
+False
+UserWarning: CUDA initialization: The NVIDIA driver on your system is too old (found version 11040).
+```
+
+`convert in.png out.pdf`
+```
+convert-im6.q16: attempt to perform an operation not allowed by the security policy `PDF' @ error/constitute.c/IsCoderAuthorized/421.
+convert-im6.q16: no images defined `out.pdf' @ error/convert.c/ConvertImageCommand/3229.
+```
+
+`pandoc in.md -o out.pdf`
+```
+pandoc: pdflatex not found. pdflatex is needed for pdf output.
+```
+
+`pdflatex main.tex`
+```
+! LaTeX Error: File `tikz.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+! Emergency stop.
+```
+
+`nvm install 22`
+```
+Command 'nvm' not found, but can be installed with:
+sudo snap install nvm
+```
+
+`flatpak install flathub org.videolan.VLC`
+```
+error: Failed to install org.videolan.VLC: Error opening file /var/lib/flatpak/repo/tmp/cache-xxx: No space left on device
+```
+
+`snap install code --classic`
+```
+error: cannot communicate with server: Post "http://localhost/v2/snaps/code": dial unix /run/snapd.socket: connect: no such file or directory
+```
+
+`wine app.exe`
+```
+wine: could not load kernel32.dll, status c0000135
+```
+
+`steam`
+```
+steam.sh[2301]: Running Steam on ubuntu 24.04 64-bit
+libGL error: failed to load driver: swrast
+Steam: An X Error occurred
+```
+
+`adb devices`
+```
+List of devices attached
+ABCDEF123456	unauthorized
+```
+
+`adb install app.apk`
+```
+adb: failed to install app.apk: Failure [INSTALL_FAILED_UPDATE_INCOMPATIBLE: Package com.example.app signatures do not match previously installed version]
+```
+
+`fastboot flash boot boot.img`
+```
+< waiting for any device >
+```
+
+`java -jar server.jar`
+```
+Error: LinkageError occurred while loading main class net.minecraft.server.Main
+	java.lang.UnsupportedClassVersionError: net/minecraft/server/Main has been compiled by a more recent version of the Java Runtime (class file version 65.0), this version of the Java Runtime only recognizes class file versions up to 61.0
+```
+
+`gh pr create`
+```
+GraphQL: Resource not accessible by personal access token (createPullRequest)
+```
+
+`gh auth login`
+```
+error validating token: HTTP 401: Bad credentials (https://api.github.com/)
+```
+
+`code .`
+```
+[main 12:00:01] Error: Missing X server or $DISPLAY
+[main 12:00:01] The platform failed to initialize. Exiting.
+```
+
+`vim file.txt`
+```
+E325: ATTENTION
+Found a swap file by the name ".file.txt.swp"
+          owned by: dev   dated: Sat Nov  7 11:58:12 2026
+While opening file "file.txt"
+```
+
+`ssh-add key`
+```
+Could not open a connection to your authentication agent.
+```
+
+`ssh -i key.pem user@host`
+```
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Permissions 0644 for 'key.pem' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "key.pem": bad permissions
+user@host: Permission denied (publickey).
+```
+
+`gpg --verify file.sig`
+```
+gpg: Signature made Sat 07 Nov 2026 12:00:01 PM UTC
+gpg:                using RSA key ABCDEF1234567890
+gpg: Can't check signature: No public key
+```
+
+## Windows
+
+`yt-dlp URL`
+```
+ERROR: [youtube] xxxx: Sign in to confirm you're not a bot. Use --cookies-from-browser or --cookies for the authentication.
+```
+
+`yt-dlp URL`
+```
+ERROR: unable to write data: [Errno 22] Invalid argument
+```
+
+`yt-dlp --cookies-from-browser chrome URL`
+```
+ERROR: Could not copy Chrome cookie database. See  https://github.com/yt-dlp/yt-dlp/issues/7271  for more info
+```
+
+`yt-dlp -x --audio-format mp3 URL`
+```
+ERROR: Postprocessing: ffprobe and ffmpeg not found. Please install or provide the path using --ffmpeg-location
+```
+
+`yt-dlp`
+```
+'yt-dlp' is not recognized as an internal or external command,
+operable program or batch file.
+```
+
+`ffmpeg -i in.mp4 out.mp3`
+```
+'ffmpeg' is not recognized as an internal or external command,
+operable program or batch file.
+```
+
+`ffmpeg -i "C:\My Videos\in.mp4" out.mp4`
+```
+C:\My: No such file or directory
+```
+
+`ffmpeg -i in.mp4 -vf subtitles=C:\sub.srt out.mp4`
+```
+[AVFilterGraph @ 000001] Error parsing a filter description around: :\sub.srt
+Error opening output file out.mp4.
+Error reinitializing filters!
+Invalid argument
+```
+
+`scoop install git`
+```
+scoop : File C:\Users\user\scoop\shims\scoop.ps1 cannot be loaded because running scripts is disabled on this system.
+```
+
+`scoop install git`
+```
+Installing 'git' (2.47.0.windows.2) [64bit] from 'main' bucket
+Loading PortableGit-2.47.0.2-64-bit.7z.exe from cache.
+Checking hash of PortableGit-2.47.0.2-64-bit.7z.exe ... ERROR Hash check failed!
+App URL: https://github.com/git-for-windows/git/releases/download/v2.47.0.windows.2/PortableGit-2.47.0.2-64-bit.7z.exe
+Expected: 1a2b3c...
+Actual:   9f8e7d...
+```
+
+`choco install ffmpeg`
+```
+ffmpeg not installed. An error occurred during installation:
+ Access to the path 'C:\ProgramData\chocolatey\lib-bad' is denied.
+The install of ffmpeg was NOT successful.
+```
+
+`aria2c URL`
+```
+01/07 12:00:01 [ERROR] CUID#7 - Download aborted. URI=https://example.com/file.iso
+Exception: [AbstractCommand.cc:351] errorCode=1 URI=https://example.com/file.iso
+  -> [SocketCore.cc:1019] errorCode=1 SSL/TLS handshake failure: `certificate verify failed`
+```
+
+`ollama run llama3`
+```
+Error: could not connect to ollama app, is it running?
+```
+
+`python -m pip install openai-whisper`
+```
+error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
+      [end of output]
+
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+ERROR: Failed building wheel for tokenizers
+```
+
+`python train.py`
+```
+RuntimeError: Attempting to deserialize object on a CUDA device but torch.cuda.is_available() is False. If you are running on a CPU-only machine, please use torch.load with map_location=torch.device('cpu') to map your storages to the CPU.
+```
+
+`jupyter notebook`
+```
+'jupyter' is not recognized as an internal or external command,
+operable program or batch file.
+```
+
+`conda activate base`
+```
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+```
+
+`magick convert in.png out.pdf`
+```
+magick: attempt to perform an operation not allowed by the security policy `PDF' @ error/constitute.c/IsCoderAuthorized/426.
+```
+
+`pdflatex main.tex`
+```
+'pdflatex' is not recognized as an internal or external command,
+operable program or batch file.
+```
+
+`adb devices`
+```
+* daemon not running; starting now at tcp:5037
+* daemon started successfully
+List of devices attached
+
+```
+
+`adb install app.apk`
+```
+adb: failed to install app.apk: Failure [INSTALL_FAILED_OLDER_SDK: Failed parse during installPackageLI: /data/app/vmdl123.tmp/base.apk (at Binary XML file line #7): Requires newer sdk version #34 (current version is #29)]
+```
+
+`java -jar app.jar`
+```
+'java' is not recognized as an internal or external command,
+operable program or batch file.
+```
+
+`java -jar app.jar`
+```
+Error: A JNI error has occurred, please check your installation and try again
+Exception in thread "main" java.lang.UnsupportedClassVersionError: App has been compiled by a more recent version of the Java Runtime (class file version 65.0), this version of the Java Runtime only recognizes class file versions up to 52.0
+```
+
+`gh pr create`
+```
+To get started with GitHub CLI, please run:  gh auth login
+Alternatively, populate the GH_TOKEN environment variable with a GitHub API authentication token.
+```
+
+`code .`
+```
+'code' is not recognized as an internal or external command,
+operable program or batch file.
+```
+
+`ssh -i key.pem user@host`
+```
+Bad permissions. Try removing permissions for user: BUILTIN\Users (S-1-5-32-545) on file C:/Users/user/key.pem.
+Load key "key.pem": bad permissions
+user@host: Permission denied (publickey).
+```
+
+`ssh-add key`
+```
+Error connecting to agent: No such file or directory
+```
+
+`7z x archive.7z`
+```
+ERROR: Cannot open encrypted archive. Wrong password?
+```
+
+`wsl yt-dlp URL`
+```
+<3>WSL (12) ERROR: CreateProcessParseCommon:711: Failed to translate C:\Users\user
+yt-dlp: command not found
+```

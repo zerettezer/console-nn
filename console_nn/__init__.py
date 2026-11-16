@@ -20,6 +20,7 @@ from .api import (
     available_models,
     get_default_analyzer,
 )
+from .stream import StreamAnalyzer
 
 __version__ = "0.1.0"
 
@@ -32,5 +33,6 @@ __all__ = [
     "analyze_lines",
     "available_models",
     "get_default_analyzer",
+    "StreamAnalyzer",
     "__version__",
 ]

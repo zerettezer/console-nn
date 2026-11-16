@@ -103,6 +103,15 @@ def _setup(root: Path) -> None:
     os.chmod(root / "secret.txt", 0)
     (root / "dir").mkdir(exist_ok=True)
     (root / "dir" / "nested.txt").write_text("nested\n")
+    (root / "repo").mkdir(exist_ok=True)
+    (root / "repo" / "file.txt").write_text("tracked\n")
+    (root / "data.json").write_text('{"items": [{"id": 1, "name": "alpha"}]}\n')
+    (root / "bad.json").write_text('{"items": [}\n')
+    (root / "config.yaml").write_text("server:\n  port: 8080\n  workers: 4\n")
+    (root / "notes.txt").write_text("release notes\n")
+    (root / "script.sh").write_text("#!/bin/sh\necho hello\n")
+    (root / "main.cpp").write_text('#include <iostream>\nint main(){std::cout << "hello cpp" << std::endl;}\n')
+    (root / "bad.cpp").write_text("int main(){ return missing; }\n")
 
 
 def scenarios(root: Path) -> List[Tuple[str, str]]:
@@ -157,7 +166,7 @@ def scenarios(root: Path) -> List[Tuple[str, str]]:
     # Shell / filesystem
     for cmd in [
         "ls -la", "ls missing-dir", "pwd", "uname -a", "id",
-        "whoami", "df -h", "free -h", "ps -ef | head -n 5",
+        "whoami", "df -h", "free -h",
         "cat data.csv", "cat missing.txt", "head -n 2 data.csv",
         "tail -n 2 access.log", "wc -l access.log",
         "grep -n 503 access.log", "grep -n nomatch access.log",
@@ -191,8 +200,114 @@ def scenarios(root: Path) -> List[Tuple[str, str]]:
         "dpkg -l | head -n 5",
         "docker ps", "kubectl version --client", "terraform version",
         "cargo --version", "cmake --version", "gcc --version | head -n 1",
+        "nproc", "uptime", "date", "hostname",
+        "uname -r", "lscpu | head -n 5", "vmstat 1 1",
     ]:
         add(("system", cmd))
+
+    # Python tooling
+    for cmd in [
+        "python3 -m py_compile hello.py",
+        "python3 -m py_compile bad.py",
+        "python3 -m json.tool data.json",
+        "python3 -m json.tool bad.json",
+        "python3 -c \"import json; print(json.load(open('missing.json')))\"",
+        "python3 -m unittest discover",
+        "python3 -m pip --version",
+        "pip3 show pip",
+        "pip3 show not-a-package",
+        "python3 -c \"print(1/0)\"",
+        "python3 -c \"import os; os.listdir('/root')\"",
+        "python3 -c \"import sys; sys.exit(3)\"",
+    ]:
+        add(("python", cmd))
+
+    # Go, Node, npm, Ruby and Java tooling
+    for cmd in [
+        "go version", "go env GOMOD", "go test ./...", "go vet ./...",
+        "go run missing.go", "go build bad.go", "gofmt -l .",
+        "node --version", "node -e \"console.log(1 + 1)\"",
+        "node -e \"throw new Error('boom')\"", "node missing.js",
+        "npm --version", "npm ls", "npm run", "npm config get registry",
+        "npx --no-install missing-tool", "npm cache verify",
+        "ruby -v", "ruby -e 'puts 1 + 1'", "ruby -e 'raise \"boom\"'",
+        "ruby missing.rb", "java -version", "javac -version",
+        "java Missing", "javac Bad.java",
+    ]:
+        add(("build", cmd))
+
+    # MySQL and local services
+    for cmd in [
+        "mysql --version", "mysql -e 'select 1'",
+        "mysql -e 'select * from missing_table'",
+        "redis-cli ping", "redis-cli INFO",
+        "psql -c 'select 1'", "pg_isready",
+        "nginx -t", "nginx -s reload",
+    ]:
+        add(("system", cmd))
+
+    # Git history and branches
+    for cmd in [
+        "git -C repo config user.email dev@example.com",
+        "git -C repo config user.name dev",
+        "git -C repo add .",
+        "git -C repo commit -m 'initial commit'",
+        "git -C repo status --short", "git -C repo branch",
+        "git -C repo log --oneline", "git -C repo diff",
+        "git -C repo show --stat", "git -C repo tag",
+        "git -C repo stash list", "git -C repo clean -n",
+        "git -C repo checkout -b feature", "git -C repo remote -v",
+        "git -C repo config --local --list", "git -C repo ls-files",
+    ]:
+        add(("git", cmd))
+
+    # Filesystem tools
+    for cmd in [
+        "file data.csv", "file missing", "stat data.csv", "stat missing",
+        "du -sh .", "du -sh missing", "readlink -f data.csv",
+        "readlink missing", "basename /a/b/c.txt", "dirname /a/b/c.txt",
+        "cmp data.csv data.csv", "cmp data.csv missing",
+        "diff data.csv data.csv", "diff data.csv missing",
+        "sort data.csv", "uniq data.csv", "cut -d, -f2 data.csv",
+        "tr 'a-z' 'A-Z' < data.csv", "tee copy2.txt < data.csv",
+        "ls -l secret.txt", "stat -c %a secret.txt", "wc -c notes.txt",
+        "grep -RIn 'name' .", "find . -maxdepth 2 -type f",
+    ]:
+        add(("shell", cmd))
+
+    # JSON, archives and compression
+    for cmd in [
+        "jq . data.json", "jq . bad.json", "jq '.items[0]' data.json",
+        "jq empty missing.json", "tar -tzf archive.tar.gz",
+        "tar -xzf archive.tar.gz -C dir", "gzip -t archive.tar.gz",
+        "zip -T file.zip", "unzip -l file.zip", "unzip -o file.zip -d dir",
+    ]:
+        add(("archive", cmd))
+
+    # Package metadata
+    for cmd in [
+        "dpkg -s bash", "dpkg -s not-a-package", "apt-cache show bash",
+        "apt-cache policy bash", "apt list --installed | head -n 5",
+        "pip3 list --format=columns | head -n 5",
+    ]:
+        add(("package", cmd))
+
+    # C++ and build targets
+    for cmd in [
+        "g++ -Wall -o app main.cpp", "g++ -o bad bad.cpp",
+        "g++ -o missing missing.cpp", "g++ -o app main.cpp -lnotreal",
+        "make -n", "make missing-target", "cmake --build build --target missing",
+    ]:
+        add(("compile", cmd))
+
+    # Networking and HTTP probes
+    for cmd in [
+        "curl --max-time 2 http://127.0.0.1:9/",
+        "wget --spider --timeout=2 http://127.0.0.1:9/",
+        "ping -c 1 127.0.0.1", "getent hosts localhost",
+        "getent hosts no-such-host.invalid", "ss -tulpn",
+    ]:
+        add(("network", cmd))
 
     return cases
 
@@ -217,6 +332,13 @@ def collect() -> Dict[str, int]:
         host = socket.gethostname()
         text = text.replace(f"/home/{user}", "/home/dev")
         text = text.replace(user, "dev").replace(host, "workstation")
+        # Never persist personal mailboxes from global git/ssh config.
+        text = re.sub(
+            r"\b[\w.+-]+@(?:gmail|googlemail|outlook|hotmail|yahoo)\.[A-Za-z.]+\b",
+            "dev@example.com",
+            text,
+            flags=re.IGNORECASE,
+        )
         lines = [line.rstrip() for line in text.splitlines() if line.strip()]
         if not lines:
             lines = ["command produced no output"]

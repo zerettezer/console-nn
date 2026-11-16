@@ -18,7 +18,7 @@ class RealDataTest(unittest.TestCase):
             self.assertTrue(docs, split)
             total += len(docs)
             for doc in docs:
-                self.assertIn(doc["source"], ("real", "real_user"))
+                self.assertIn(doc["source"], ("real", "real_user", "curated"))
                 self.assertTrue(doc["lines"])
         self.assertGreaterEqual(total, 50)
 
@@ -31,6 +31,18 @@ class RealDataTest(unittest.TestCase):
         sources = {d.get("source") for d in docs}
         self.assertIn("synthetic", sources)
         self.assertIn("real", sources)
+
+    def test_curated_sessions_are_sanitized(self):
+        text = ""
+        sources = set()
+        for split in ("train", "val", "test"):
+            path = ROOT / "data" / "real" / f"{split}.jsonl"
+            text += path.read_text()
+            for line in path.read_text().splitlines():
+                if line.strip():
+                    sources.add(json.loads(line)["source"])
+        self.assertIn("curated", sources)
+        self.assertNotRegex(text, r"/home/(?!dev(?:/|\b))")
 
     def test_no_exit_code_literals(self):
         for split in ("train", "val", "test"):

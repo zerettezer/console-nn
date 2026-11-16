@@ -1,0 +1,1235 @@
+{
+  "config": "configs/cpu.json",
+  "data": "data/mixed",
+  "domain_groups": {
+    "python": [
+      "python",
+      "pip",
+      "pytest",
+      "conda"
+    ],
+    "build_package": [
+      "build",
+      "compile",
+      "package",
+      "package_update",
+      "maven",
+      "gradle",
+      "dotnet"
+    ],
+    "system": [
+      "shell",
+      "systemd",
+      "kernel",
+      "journal",
+      "filesystem",
+      "network",
+      "security"
+    ],
+    "data_infra": [
+      "archive",
+      "backup",
+      "cloud",
+      "data_process",
+      "database",
+      "docker",
+      "git",
+      "media",
+      "redis",
+      "postgres",
+      "mysql",
+      "nginx"
+    ],
+    "windows_misc": [
+      "windows_cmd",
+      "windows_update",
+      "powershell",
+      "real_errors",
+      "errors",
+      "commands",
+      "multi",
+      "multi_chain"
+    ],
+    "language_ecosystems": [
+      "node",
+      "npm",
+      "cargo",
+      "go",
+      "ruby",
+      "php"
+    ],
+    "orchestration": [
+      "kubectl",
+      "helm",
+      "terraform",
+      "ansible",
+      "github_actions",
+      "gitlab_ci",
+      "jenkins"
+    ]
+  },
+  "budget": {
+    "epochs": 4,
+    "steps_per_epoch": 250,
+    "validation_steps": 60,
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "bootstrap_samples": 1000
+  },
+  "folds": [
+    {
+      "group": "python",
+      "seed": 1,
+      "data": {
+        "train": 33369,
+        "val": 4195,
+        "test": 385
+      },
+      "train_seconds": 115.9,
+      "epochs": 4,
+      "documents": 385,
+      "doc_accuracy": 0.79481,
+      "doc_accuracy_ci95": [
+        0.75065,
+        0.83377
+      ],
+      "completion_accuracy": 0.8987,
+      "completion_accuracy_ci95": [
+        0.87006,
+        0.92987
+      ]
+    },
+    {
+      "group": "python",
+      "seed": 2,
+      "data": {
+        "train": 33369,
+        "val": 4195,
+        "test": 385
+      },
+      "train_seconds": 90.2,
+      "epochs": 4,
+      "documents": 385,
+      "doc_accuracy": 0.90649,
+      "doc_accuracy_ci95": [
+        0.87532,
+        0.93247
+      ],
+      "completion_accuracy": 0.95065,
+      "completion_accuracy_ci95": [
+        0.92987,
+        0.97143
+      ]
+    },
+    {
+      "group": "python",
+      "seed": 3,
+      "data": {
+        "train": 33369,
+        "val": 4195,
+        "test": 385
+      },
+      "train_seconds": 77.5,
+      "epochs": 4,
+      "documents": 385,
+      "doc_accuracy": 0.89091,
+      "doc_accuracy_ci95": [
+        0.85974,
+        0.92208
+      ],
+      "completion_accuracy": 0.92208,
+      "completion_accuracy_ci95": [
+        0.89604,
+        0.94805
+      ]
+    },
+    {
+      "group": "build_package",
+      "seed": 1,
+      "data": {
+        "train": 31351,
+        "val": 3918,
+        "test": 631
+      },
+      "train_seconds": 114.5,
+      "epochs": 4,
+      "documents": 631,
+      "doc_accuracy": 0.7496,
+      "doc_accuracy_ci95": [
+        0.71787,
+        0.78447
+      ],
+      "completion_accuracy": 0.93819,
+      "completion_accuracy_ci95": [
+        0.91918,
+        0.95563
+      ]
+    },
+    {
+      "group": "build_package",
+      "seed": 2,
+      "data": {
+        "train": 31351,
+        "val": 3918,
+        "test": 631
+      },
+      "train_seconds": 83.9,
+      "epochs": 4,
+      "documents": 631,
+      "doc_accuracy": 0.75911,
+      "doc_accuracy_ci95": [
+        0.729,
+        0.79239
+      ],
+      "completion_accuracy": 0.98257,
+      "completion_accuracy_ci95": [
+        0.97147,
+        0.99208
+      ]
+    },
+    {
+      "group": "build_package",
+      "seed": 3,
+      "data": {
+        "train": 31351,
+        "val": 3918,
+        "test": 631
+      },
+      "train_seconds": 80.2,
+      "epochs": 4,
+      "documents": 631,
+      "doc_accuracy": 0.7496,
+      "doc_accuracy_ci95": [
+        0.71791,
+        0.7813
+      ],
+      "completion_accuracy": 0.95404,
+      "completion_accuracy_ci95": [
+        0.93819,
+        0.96989
+      ]
+    },
+    {
+      "group": "system",
+      "seed": 1,
+      "data": {
+        "train": 31205,
+        "val": 3869,
+        "test": 641
+      },
+      "train_seconds": 118.0,
+      "epochs": 4,
+      "documents": 641,
+      "doc_accuracy": 0.76287,
+      "doc_accuracy_ci95": [
+        0.73007,
+        0.79719
+      ],
+      "completion_accuracy": 0.9376,
+      "completion_accuracy_ci95": [
+        0.91884,
+        0.9548
+      ]
+    },
+    {
+      "group": "system",
+      "seed": 2,
+      "data": {
+        "train": 31205,
+        "val": 3869,
+        "test": 641
+      },
+      "train_seconds": 87.4,
+      "epochs": 4,
+      "documents": 641,
+      "doc_accuracy": 0.73011,
+      "doc_accuracy_ci95": [
+        0.69735,
+        0.76443
+      ],
+      "completion_accuracy": 0.93448,
+      "completion_accuracy_ci95": [
+        0.91572,
+        0.95164
+      ]
+    },
+    {
+      "group": "system",
+      "seed": 3,
+      "data": {
+        "train": 31205,
+        "val": 3869,
+        "test": 641
+      },
+      "train_seconds": 91.6,
+      "epochs": 4,
+      "documents": 641,
+      "doc_accuracy": 0.80967,
+      "doc_accuracy_ci95": [
+        0.77847,
+        0.83931
+      ],
+      "completion_accuracy": 0.95788,
+      "completion_accuracy_ci95": [
+        0.94228,
+        0.97348
+      ]
+    },
+    {
+      "group": "data_infra",
+      "seed": 1,
+      "data": {
+        "train": 27703,
+        "val": 3475,
+        "test": 1056
+      },
+      "train_seconds": 99.6,
+      "epochs": 4,
+      "documents": 1056,
+      "doc_accuracy": 0.75568,
+      "doc_accuracy_ci95": [
+        0.72822,
+        0.7822
+      ],
+      "completion_accuracy": 0.91477,
+      "completion_accuracy_ci95": [
+        0.89678,
+        0.93182
+      ]
+    },
+    {
+      "group": "data_infra",
+      "seed": 2,
+      "data": {
+        "train": 27703,
+        "val": 3475,
+        "test": 1056
+      },
+      "train_seconds": 69.0,
+      "epochs": 4,
+      "documents": 1056,
+      "doc_accuracy": 0.77462,
+      "doc_accuracy_ci95": [
+        0.74905,
+        0.7983
+      ],
+      "completion_accuracy": 0.91288,
+      "completion_accuracy_ci95": [
+        0.89583,
+        0.92898
+      ]
+    },
+    {
+      "group": "data_infra",
+      "seed": 3,
+      "data": {
+        "train": 27703,
+        "val": 3475,
+        "test": 1056
+      },
+      "train_seconds": 66.6,
+      "epochs": 4,
+      "documents": 1056,
+      "doc_accuracy": 0.76894,
+      "doc_accuracy_ci95": [
+        0.74337,
+        0.79356
+      ],
+      "completion_accuracy": 0.90814,
+      "completion_accuracy_ci95": [
+        0.89107,
+        0.92519
+      ]
+    },
+    {
+      "group": "windows_misc",
+      "seed": 1,
+      "data": {
+        "train": 30542,
+        "val": 3802,
+        "test": 700
+      },
+      "train_seconds": 101.0,
+      "epochs": 4,
+      "documents": 700,
+      "doc_accuracy": 0.76714,
+      "doc_accuracy_ci95": [
+        0.73568,
+        0.79718
+      ],
+      "completion_accuracy": 0.89857,
+      "completion_accuracy_ci95": [
+        0.87571,
+        0.92143
+      ]
+    },
+    {
+      "group": "windows_misc",
+      "seed": 2,
+      "data": {
+        "train": 30542,
+        "val": 3802,
+        "test": 700
+      },
+      "train_seconds": 81.5,
+      "epochs": 4,
+      "documents": 700,
+      "doc_accuracy": 0.74857,
+      "doc_accuracy_ci95": [
+        0.71571,
+        0.78
+      ],
+      "completion_accuracy": 0.89143,
+      "completion_accuracy_ci95": [
+        0.86857,
+        0.91429
+      ]
+    },
+    {
+      "group": "windows_misc",
+      "seed": 3,
+      "data": {
+        "train": 30542,
+        "val": 3802,
+        "test": 700
+      },
+      "train_seconds": 77.0,
+      "epochs": 4,
+      "documents": 700,
+      "doc_accuracy": 0.73,
+      "doc_accuracy_ci95": [
+        0.69857,
+        0.76143
+      ],
+      "completion_accuracy": 0.87143,
+      "completion_accuracy_ci95": [
+        0.84714,
+        0.89571
+      ]
+    },
+    {
+      "group": "language_ecosystems",
+      "seed": 1,
+      "data": {
+        "train": 32077,
+        "val": 4000,
+        "test": 549
+      },
+      "train_seconds": 114.6,
+      "epochs": 4,
+      "documents": 549,
+      "doc_accuracy": 0.73953,
+      "doc_accuracy_ci95": [
+        0.70128,
+        0.77596
+      ],
+      "completion_accuracy": 0.98543,
+      "completion_accuracy_ci95": [
+        0.9745,
+        0.99454
+      ]
+    },
+    {
+      "group": "language_ecosystems",
+      "seed": 2,
+      "data": {
+        "train": 32077,
+        "val": 4000,
+        "test": 549
+      },
+      "train_seconds": 86.5,
+      "epochs": 4,
+      "documents": 549,
+      "doc_accuracy": 0.67942,
+      "doc_accuracy_ci95": [
+        0.63934,
+        0.71767
+      ],
+      "completion_accuracy": 0.98361,
+      "completion_accuracy_ci95": [
+        0.97268,
+        0.99271
+      ]
+    },
+    {
+      "group": "language_ecosystems",
+      "seed": 3,
+      "data": {
+        "train": 32077,
+        "val": 4000,
+        "test": 549
+      },
+      "train_seconds": 87.9,
+      "epochs": 4,
+      "documents": 549,
+      "doc_accuracy": 0.75774,
+      "doc_accuracy_ci95": [
+        0.72313,
+        0.79417
+      ],
+      "completion_accuracy": 0.98543,
+      "completion_accuracy_ci95": [
+        0.9745,
+        0.99454
+      ]
+    },
+    {
+      "group": "orchestration",
+      "seed": 1,
+      "data": {
+        "train": 31229,
+        "val": 3945,
+        "test": 629
+      },
+      "train_seconds": 119.9,
+      "epochs": 4,
+      "documents": 629,
+      "doc_accuracy": 0.6248,
+      "doc_accuracy_ci95": [
+        0.58502,
+        0.66137
+      ],
+      "completion_accuracy": 0.91574,
+      "completion_accuracy_ci95": [
+        0.89189,
+        0.93641
+      ]
+    },
+    {
+      "group": "orchestration",
+      "seed": 2,
+      "data": {
+        "train": 31229,
+        "val": 3945,
+        "test": 629
+      },
+      "train_seconds": 92.0,
+      "epochs": 4,
+      "documents": 629,
+      "doc_accuracy": 0.65342,
+      "doc_accuracy_ci95": [
+        0.61526,
+        0.69157
+      ],
+      "completion_accuracy": 0.8903,
+      "completion_accuracy_ci95": [
+        0.86641,
+        0.91415
+      ]
+    },
+    {
+      "group": "orchestration",
+      "seed": 3,
+      "data": {
+        "train": 31229,
+        "val": 3945,
+        "test": 629
+      },
+      "train_seconds": 94.6,
+      "epochs": 4,
+      "documents": 629,
+      "doc_accuracy": 0.65024,
+      "doc_accuracy_ci95": [
+        0.61208,
+        0.6868
+      ],
+      "completion_accuracy": 0.90143,
+      "completion_accuracy_ci95": [
+        0.87754,
+        0.92369
+      ]
+    }
+  ],
+  "table": [
+    {
+      "group": "python",
+      "domains": [
+        "python",
+        "pip",
+        "pytest",
+        "conda"
+      ],
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "documents": 385,
+      "doc_accuracy": 0.86407,
+      "doc_accuracy_ci95": [
+        0.83721,
+        0.8892
+      ],
+      "completion_accuracy": 0.92381,
+      "completion_accuracy_ci95": [
+        0.89868,
+        0.94723
+      ],
+      "seed_doc_accuracy_std": 0.04939,
+      "runs": [
+        {
+          "group": "python",
+          "seed": 1,
+          "data": {
+            "train": 33369,
+            "val": 4195,
+            "test": 385
+          },
+          "train_seconds": 115.9,
+          "epochs": 4,
+          "documents": 385,
+          "doc_accuracy": 0.79481,
+          "doc_accuracy_ci95": [
+            0.75065,
+            0.83377
+          ],
+          "completion_accuracy": 0.8987,
+          "completion_accuracy_ci95": [
+            0.87006,
+            0.92987
+          ]
+        },
+        {
+          "group": "python",
+          "seed": 2,
+          "data": {
+            "train": 33369,
+            "val": 4195,
+            "test": 385
+          },
+          "train_seconds": 90.2,
+          "epochs": 4,
+          "documents": 385,
+          "doc_accuracy": 0.90649,
+          "doc_accuracy_ci95": [
+            0.87532,
+            0.93247
+          ],
+          "completion_accuracy": 0.95065,
+          "completion_accuracy_ci95": [
+            0.92987,
+            0.97143
+          ]
+        },
+        {
+          "group": "python",
+          "seed": 3,
+          "data": {
+            "train": 33369,
+            "val": 4195,
+            "test": 385
+          },
+          "train_seconds": 77.5,
+          "epochs": 4,
+          "documents": 385,
+          "doc_accuracy": 0.89091,
+          "doc_accuracy_ci95": [
+            0.85974,
+            0.92208
+          ],
+          "completion_accuracy": 0.92208,
+          "completion_accuracy_ci95": [
+            0.89604,
+            0.94805
+          ]
+        }
+      ]
+    },
+    {
+      "group": "build_package",
+      "domains": [
+        "build",
+        "compile",
+        "package",
+        "package_update",
+        "maven",
+        "gradle",
+        "dotnet"
+      ],
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "documents": 631,
+      "doc_accuracy": 0.75277,
+      "doc_accuracy_ci95": [
+        0.72213,
+        0.78288
+      ],
+      "completion_accuracy": 0.95827,
+      "completion_accuracy_ci95": [
+        0.94559,
+        0.97043
+      ],
+      "seed_doc_accuracy_std": 0.00448,
+      "runs": [
+        {
+          "group": "build_package",
+          "seed": 1,
+          "data": {
+            "train": 31351,
+            "val": 3918,
+            "test": 631
+          },
+          "train_seconds": 114.5,
+          "epochs": 4,
+          "documents": 631,
+          "doc_accuracy": 0.7496,
+          "doc_accuracy_ci95": [
+            0.71787,
+            0.78447
+          ],
+          "completion_accuracy": 0.93819,
+          "completion_accuracy_ci95": [
+            0.91918,
+            0.95563
+          ]
+        },
+        {
+          "group": "build_package",
+          "seed": 2,
+          "data": {
+            "train": 31351,
+            "val": 3918,
+            "test": 631
+          },
+          "train_seconds": 83.9,
+          "epochs": 4,
+          "documents": 631,
+          "doc_accuracy": 0.75911,
+          "doc_accuracy_ci95": [
+            0.729,
+            0.79239
+          ],
+          "completion_accuracy": 0.98257,
+          "completion_accuracy_ci95": [
+            0.97147,
+            0.99208
+          ]
+        },
+        {
+          "group": "build_package",
+          "seed": 3,
+          "data": {
+            "train": 31351,
+            "val": 3918,
+            "test": 631
+          },
+          "train_seconds": 80.2,
+          "epochs": 4,
+          "documents": 631,
+          "doc_accuracy": 0.7496,
+          "doc_accuracy_ci95": [
+            0.71791,
+            0.7813
+          ],
+          "completion_accuracy": 0.95404,
+          "completion_accuracy_ci95": [
+            0.93819,
+            0.96989
+          ]
+        }
+      ]
+    },
+    {
+      "group": "system",
+      "domains": [
+        "shell",
+        "systemd",
+        "kernel",
+        "journal",
+        "filesystem",
+        "network",
+        "security"
+      ],
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "documents": 641,
+      "doc_accuracy": 0.76755,
+      "doc_accuracy_ci95": [
+        0.74363,
+        0.79511
+      ],
+      "completion_accuracy": 0.94332,
+      "completion_accuracy_ci95": [
+        0.92824,
+        0.9584
+      ],
+      "seed_doc_accuracy_std": 0.03265,
+      "runs": [
+        {
+          "group": "system",
+          "seed": 1,
+          "data": {
+            "train": 31205,
+            "val": 3869,
+            "test": 641
+          },
+          "train_seconds": 118.0,
+          "epochs": 4,
+          "documents": 641,
+          "doc_accuracy": 0.76287,
+          "doc_accuracy_ci95": [
+            0.73007,
+            0.79719
+          ],
+          "completion_accuracy": 0.9376,
+          "completion_accuracy_ci95": [
+            0.91884,
+            0.9548
+          ]
+        },
+        {
+          "group": "system",
+          "seed": 2,
+          "data": {
+            "train": 31205,
+            "val": 3869,
+            "test": 641
+          },
+          "train_seconds": 87.4,
+          "epochs": 4,
+          "documents": 641,
+          "doc_accuracy": 0.73011,
+          "doc_accuracy_ci95": [
+            0.69735,
+            0.76443
+          ],
+          "completion_accuracy": 0.93448,
+          "completion_accuracy_ci95": [
+            0.91572,
+            0.95164
+          ]
+        },
+        {
+          "group": "system",
+          "seed": 3,
+          "data": {
+            "train": 31205,
+            "val": 3869,
+            "test": 641
+          },
+          "train_seconds": 91.6,
+          "epochs": 4,
+          "documents": 641,
+          "doc_accuracy": 0.80967,
+          "doc_accuracy_ci95": [
+            0.77847,
+            0.83931
+          ],
+          "completion_accuracy": 0.95788,
+          "completion_accuracy_ci95": [
+            0.94228,
+            0.97348
+          ]
+        }
+      ]
+    },
+    {
+      "group": "data_infra",
+      "domains": [
+        "archive",
+        "backup",
+        "cloud",
+        "data_process",
+        "database",
+        "docker",
+        "git",
+        "media",
+        "redis",
+        "postgres",
+        "mysql",
+        "nginx"
+      ],
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "documents": 1056,
+      "doc_accuracy": 0.76641,
+      "doc_accuracy_ci95": [
+        0.74211,
+        0.7901
+      ],
+      "completion_accuracy": 0.91193,
+      "completion_accuracy_ci95": [
+        0.89488,
+        0.92709
+      ],
+      "seed_doc_accuracy_std": 0.00794,
+      "runs": [
+        {
+          "group": "data_infra",
+          "seed": 1,
+          "data": {
+            "train": 27703,
+            "val": 3475,
+            "test": 1056
+          },
+          "train_seconds": 99.6,
+          "epochs": 4,
+          "documents": 1056,
+          "doc_accuracy": 0.75568,
+          "doc_accuracy_ci95": [
+            0.72822,
+            0.7822
+          ],
+          "completion_accuracy": 0.91477,
+          "completion_accuracy_ci95": [
+            0.89678,
+            0.93182
+          ]
+        },
+        {
+          "group": "data_infra",
+          "seed": 2,
+          "data": {
+            "train": 27703,
+            "val": 3475,
+            "test": 1056
+          },
+          "train_seconds": 69.0,
+          "epochs": 4,
+          "documents": 1056,
+          "doc_accuracy": 0.77462,
+          "doc_accuracy_ci95": [
+            0.74905,
+            0.7983
+          ],
+          "completion_accuracy": 0.91288,
+          "completion_accuracy_ci95": [
+            0.89583,
+            0.92898
+          ]
+        },
+        {
+          "group": "data_infra",
+          "seed": 3,
+          "data": {
+            "train": 27703,
+            "val": 3475,
+            "test": 1056
+          },
+          "train_seconds": 66.6,
+          "epochs": 4,
+          "documents": 1056,
+          "doc_accuracy": 0.76894,
+          "doc_accuracy_ci95": [
+            0.74337,
+            0.79356
+          ],
+          "completion_accuracy": 0.90814,
+          "completion_accuracy_ci95": [
+            0.89107,
+            0.92519
+          ]
+        }
+      ]
+    },
+    {
+      "group": "windows_misc",
+      "domains": [
+        "windows_cmd",
+        "windows_update",
+        "powershell",
+        "real_errors",
+        "errors",
+        "commands",
+        "multi",
+        "multi_chain"
+      ],
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "documents": 700,
+      "doc_accuracy": 0.74857,
+      "doc_accuracy_ci95": [
+        0.71762,
+        0.77762
+      ],
+      "completion_accuracy": 0.88714,
+      "completion_accuracy_ci95": [
+        0.86524,
+        0.90715
+      ],
+      "seed_doc_accuracy_std": 0.01516,
+      "runs": [
+        {
+          "group": "windows_misc",
+          "seed": 1,
+          "data": {
+            "train": 30542,
+            "val": 3802,
+            "test": 700
+          },
+          "train_seconds": 101.0,
+          "epochs": 4,
+          "documents": 700,
+          "doc_accuracy": 0.76714,
+          "doc_accuracy_ci95": [
+            0.73568,
+            0.79718
+          ],
+          "completion_accuracy": 0.89857,
+          "completion_accuracy_ci95": [
+            0.87571,
+            0.92143
+          ]
+        },
+        {
+          "group": "windows_misc",
+          "seed": 2,
+          "data": {
+            "train": 30542,
+            "val": 3802,
+            "test": 700
+          },
+          "train_seconds": 81.5,
+          "epochs": 4,
+          "documents": 700,
+          "doc_accuracy": 0.74857,
+          "doc_accuracy_ci95": [
+            0.71571,
+            0.78
+          ],
+          "completion_accuracy": 0.89143,
+          "completion_accuracy_ci95": [
+            0.86857,
+            0.91429
+          ]
+        },
+        {
+          "group": "windows_misc",
+          "seed": 3,
+          "data": {
+            "train": 30542,
+            "val": 3802,
+            "test": 700
+          },
+          "train_seconds": 77.0,
+          "epochs": 4,
+          "documents": 700,
+          "doc_accuracy": 0.73,
+          "doc_accuracy_ci95": [
+            0.69857,
+            0.76143
+          ],
+          "completion_accuracy": 0.87143,
+          "completion_accuracy_ci95": [
+            0.84714,
+            0.89571
+          ]
+        }
+      ]
+    },
+    {
+      "group": "language_ecosystems",
+      "domains": [
+        "node",
+        "npm",
+        "cargo",
+        "go",
+        "ruby",
+        "php"
+      ],
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "documents": 549,
+      "doc_accuracy": 0.72556,
+      "doc_accuracy_ci95": [
+        0.68912,
+        0.75956
+      ],
+      "completion_accuracy": 0.98482,
+      "completion_accuracy_ci95": [
+        0.97389,
+        0.99454
+      ],
+      "seed_doc_accuracy_std": 0.03346,
+      "runs": [
+        {
+          "group": "language_ecosystems",
+          "seed": 1,
+          "data": {
+            "train": 32077,
+            "val": 4000,
+            "test": 549
+          },
+          "train_seconds": 114.6,
+          "epochs": 4,
+          "documents": 549,
+          "doc_accuracy": 0.73953,
+          "doc_accuracy_ci95": [
+            0.70128,
+            0.77596
+          ],
+          "completion_accuracy": 0.98543,
+          "completion_accuracy_ci95": [
+            0.9745,
+            0.99454
+          ]
+        },
+        {
+          "group": "language_ecosystems",
+          "seed": 2,
+          "data": {
+            "train": 32077,
+            "val": 4000,
+            "test": 549
+          },
+          "train_seconds": 86.5,
+          "epochs": 4,
+          "documents": 549,
+          "doc_accuracy": 0.67942,
+          "doc_accuracy_ci95": [
+            0.63934,
+            0.71767
+          ],
+          "completion_accuracy": 0.98361,
+          "completion_accuracy_ci95": [
+            0.97268,
+            0.99271
+          ]
+        },
+        {
+          "group": "language_ecosystems",
+          "seed": 3,
+          "data": {
+            "train": 32077,
+            "val": 4000,
+            "test": 549
+          },
+          "train_seconds": 87.9,
+          "epochs": 4,
+          "documents": 549,
+          "doc_accuracy": 0.75774,
+          "doc_accuracy_ci95": [
+            0.72313,
+            0.79417
+          ],
+          "completion_accuracy": 0.98543,
+          "completion_accuracy_ci95": [
+            0.9745,
+            0.99454
+          ]
+        }
+      ]
+    },
+    {
+      "group": "orchestration",
+      "domains": [
+        "kubectl",
+        "helm",
+        "terraform",
+        "ansible",
+        "github_actions",
+        "gitlab_ci",
+        "jenkins"
+      ],
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "documents": 629,
+      "doc_accuracy": 0.64282,
+      "doc_accuracy_ci95": [
+        0.60837,
+        0.67939
+      ],
+      "completion_accuracy": 0.90249,
+      "completion_accuracy_ci95": [
+        0.88129,
+        0.9221
+      ],
+      "seed_doc_accuracy_std": 0.01281,
+      "runs": [
+        {
+          "group": "orchestration",
+          "seed": 1,
+          "data": {
+            "train": 31229,
+            "val": 3945,
+            "test": 629
+          },
+          "train_seconds": 119.9,
+          "epochs": 4,
+          "documents": 629,
+          "doc_accuracy": 0.6248,
+          "doc_accuracy_ci95": [
+            0.58502,
+            0.66137
+          ],
+          "completion_accuracy": 0.91574,
+          "completion_accuracy_ci95": [
+            0.89189,
+            0.93641
+          ]
+        },
+        {
+          "group": "orchestration",
+          "seed": 2,
+          "data": {
+            "train": 31229,
+            "val": 3945,
+            "test": 629
+          },
+          "train_seconds": 92.0,
+          "epochs": 4,
+          "documents": 629,
+          "doc_accuracy": 0.65342,
+          "doc_accuracy_ci95": [
+            0.61526,
+            0.69157
+          ],
+          "completion_accuracy": 0.8903,
+          "completion_accuracy_ci95": [
+            0.86641,
+            0.91415
+          ]
+        },
+        {
+          "group": "orchestration",
+          "seed": 3,
+          "data": {
+            "train": 31229,
+            "val": 3945,
+            "test": 629
+          },
+          "train_seconds": 94.6,
+          "epochs": 4,
+          "documents": 629,
+          "doc_accuracy": 0.65024,
+          "doc_accuracy_ci95": [
+            0.61208,
+            0.6868
+          ],
+          "completion_accuracy": 0.90143,
+          "completion_accuracy_ci95": [
+            0.87754,
+            0.92369
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "groups": 7,
+    "macro_doc_accuracy": 0.75254,
+    "weighted_doc_accuracy": 0.74835,
+    "documents": 4591
+  }
+}

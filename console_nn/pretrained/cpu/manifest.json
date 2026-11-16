@@ -1,22 +1,22 @@
 {
   "format": 1,
-  "model_dir": "artifacts/cpu/model",
+  "model_dir": "console_nn/pretrained/cpu",
   "files": {
     "config.json": {
-      "sha256": "2611d06bfa1dfd6e9d0b42c3e2c0f73f7b15384685a05c3ad73de4c50968d998",
-      "bytes": 3952
+      "sha256": "38ded48f0427eab04b6bef03d016128a017641d3dcb316083654f921819c6052",
+      "bytes": 4403
     },
     "tokenizer.json": {
-      "sha256": "0c838a44ce8b52498a6785ce3be0828873f1994207da4245206eceebeefbe410",
-      "bytes": 41831
+      "sha256": "780b47c96295eca21cd89c50691b746f893184bc44b7c154519ab6f44043da7d",
+      "bytes": 41143
     },
     "weights.h5": {
-      "sha256": "c966d330e76d35e0f19ea71663c98ff8ac200816efc251dbb913c71390662a87",
+      "sha256": "a47c3a6de26aad513234c9691b01b03ebed1913c3f8b8d12208b38518869f24b",
       "bytes": 591472
     },
     "model_int8.tflite": {
-      "sha256": "8132222fe44c8558c6cbc5fd3f88e696bada2dd94bc51ab3b9f107b7eacacf54",
-      "bytes": 184712
+      "sha256": "045c368ccc0b5fc6e86ae4f30d8c2c072008f1b0d629909471ea9f57d0d751af",
+      "bytes": 184880
     }
   },
   "notes": {}

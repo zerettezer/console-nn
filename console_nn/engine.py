@@ -190,6 +190,57 @@ class ConsoleEngine:
         )
 
     # ------------------------------------------------------------------
+    def encode_chunk_features(self, ids_arr: np.ndarray):
+        """Return per-chunk features and logits for ``ids_arr [C, 16]``.
+
+        Only the float Keras backend exposes intermediate features; int8
+        streaming falls back to :meth:`analyze_lines`.
+        """
+        if self.model is None:
+            raise RuntimeError("chunk features require the Keras backend")
+        root = self.model.get_layer("console_fcn")
+        batch = tf.constant(ids_arr[None, ...], dtype=tf.int32)
+        feat, logits, _ = root.encode_chunks(batch, training=False)
+        return feat.numpy()[0], logits.numpy()[0]
+
+    def document_from_pools(
+        self,
+        feat_sum: np.ndarray,
+        feat_max: np.ndarray,
+        prob_sum: np.ndarray,
+        prob_max: np.ndarray,
+        count: int,
+    ):
+        """Run the document/completion heads over accumulated chunk pools."""
+        if self.model is None:
+            raise RuntimeError("document pools require the Keras backend")
+        root = self.model.get_layer("console_fcn")
+        denom = max(float(count), 1.0)
+        mode = self.cfg.model.pool.doc_pool
+        parts = []
+        if mode in ("mean", "mean_max"):
+            parts.append(feat_sum / denom)
+        if mode in ("max", "mean_max"):
+            parts.append(feat_max)
+        feat = np.concatenate(parts, axis=0)
+        if self.cfg.model.pool.doc_use_chunk_probs:
+            prob_parts = []
+            if mode in ("mean", "mean_max"):
+                prob_parts.append(prob_sum / denom)
+            if mode in ("max", "mean_max"):
+                prob_parts.append(prob_max)
+            feat = np.concatenate([feat] + prob_parts, axis=0)
+        tensor = tf.constant(feat[None, :], dtype=tf.float32)
+        tensor = root.doc_dense(tensor)
+        tensor = root.doc_dropout(tensor, training=False)
+        doc_logits = root.doc_head(tensor).numpy()[0]
+        if root.completed_head is not None:
+            completed_logit = float(root.completed_head(tensor).numpy()[0, 0])
+        else:
+            completed_logit = 0.0
+        return doc_logits, completed_logit
+
+    # ------------------------------------------------------------------
     def analyze_lines(self, lines: Sequence[str]) -> Dict:
         lines = [str(x).rstrip("\r\n") for x in lines]
         ids, line_ids, tokens = self.tokenizer.encode_document(lines)

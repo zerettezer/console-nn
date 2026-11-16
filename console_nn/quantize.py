@@ -44,6 +44,13 @@ def _convert(converter):
     return converter.convert()
 
 
+def _op_names(path: str) -> List[str]:
+    """Return the ordered TFLite operator names (graph signature check)."""
+    interpreter = tf.lite.Interpreter(model_path=str(path))
+    interpreter.allocate_tensors()
+    return [op.get("op_name", "") for op in interpreter._get_ops_details()]
+
+
 def quantize_run(
     run_dir: str,
     data_dir: str,
@@ -84,6 +91,7 @@ def quantize_run(
         "size_bytes": len(blob),
         "size_kb": round(len(blob) / 1024, 1),
         "seconds": round(time.time() - t0, 2),
+        "ops_count": len(_op_names(str(out))),
         "input": {
             "name": input_detail["name"],
             "shape": input_detail["shape"].tolist(),

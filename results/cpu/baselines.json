@@ -1,0 +1,574 @@
+{
+  "data": {
+    "train": "data/mixed",
+    "synth_test": "source==synthetic in data/mixed/test.jsonl",
+    "real_test": "data/real"
+  },
+  "classes": [
+    "success",
+    "fail",
+    "block",
+    "unknown"
+  ],
+  "regex": {
+    "name": "regex",
+    "params": 0,
+    "synth_test": {
+      "accuracy": 0.67378,
+      "macro_f1": 0.56623,
+      "weighted_f1": 0.62374,
+      "n": 4500,
+      "per_class": {
+        "success": {
+          "precision": 0.55404,
+          "recall": 0.78085,
+          "f1": 0.64817,
+          "support": 1556
+        },
+        "fail": {
+          "precision": 0.73706,
+          "recall": 0.83741,
+          "f1": 0.78403,
+          "support": 1513
+        },
+        "block": {
+          "precision": 0.93857,
+          "recall": 0.7483,
+          "f1": 0.8327,
+          "support": 735
+        },
+        "unknown": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 696
+        }
+      },
+      "confusion_matrix": [
+        [
+          1215,
+          341,
+          0,
+          0
+        ],
+        [
+          208,
+          1267,
+          36,
+          2
+        ],
+        [
+          74,
+          111,
+          550,
+          0
+        ],
+        [
+          696,
+          0,
+          0,
+          0
+        ]
+      ],
+      "labels": [
+        "success",
+        "fail",
+        "block",
+        "unknown"
+      ],
+      "params": 0
+    },
+    "real_test": {
+      "accuracy": 0.82418,
+      "macro_f1": 0.60481,
+      "weighted_f1": 0.81006,
+      "n": 91,
+      "per_class": {
+        "success": {
+          "precision": 0.75,
+          "recall": 0.96,
+          "f1": 0.84211,
+          "support": 25
+        },
+        "fail": {
+          "precision": 0.84,
+          "recall": 0.875,
+          "f1": 0.85714,
+          "support": 48
+        },
+        "block": {
+          "precision": 1.0,
+          "recall": 0.5625,
+          "f1": 0.72,
+          "support": 16
+        },
+        "unknown": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 2
+        }
+      },
+      "confusion_matrix": [
+        [
+          24,
+          1,
+          0,
+          0
+        ],
+        [
+          6,
+          42,
+          0,
+          0
+        ],
+        [
+          0,
+          7,
+          9,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0
+        ]
+      ],
+      "labels": [
+        "success",
+        "fail",
+        "block",
+        "unknown"
+      ],
+      "params": 0
+    }
+  },
+  "hashed_ngram_lr": {
+    "name": "hashed_ngram_lr",
+    "buckets": 8192,
+    "params": 32772,
+    "synth_test": {
+      "accuracy_mean": 0.96704,
+      "accuracy_std": 0.0001,
+      "macro_f1_mean": 0.96537,
+      "macro_f1_std": 7e-05
+    },
+    "real_test": {
+      "accuracy_mean": 0.93407,
+      "accuracy_std": 0.0,
+      "macro_f1_mean": 0.86969,
+      "macro_f1_std": 0.0
+    },
+    "runs": [
+      {
+        "seed": 1,
+        "params": 32772,
+        "synth_test": {
+          "accuracy": 0.96711,
+          "macro_f1": 0.96543,
+          "weighted_f1": 0.96703,
+          "n": 4500,
+          "per_class": {
+            "success": {
+              "precision": 0.9453,
+              "recall": 0.98843,
+              "f1": 0.96638,
+              "support": 1556
+            },
+            "fail": {
+              "precision": 0.97605,
+              "recall": 0.9696,
+              "f1": 0.97281,
+              "support": 1513
+            },
+            "block": {
+              "precision": 0.98069,
+              "recall": 0.96735,
+              "f1": 0.97397,
+              "support": 735
+            },
+            "unknown": {
+              "precision": 0.98605,
+              "recall": 0.91379,
+              "f1": 0.94855,
+              "support": 696
+            }
+          },
+          "confusion_matrix": [
+            [
+              1538,
+              15,
+              0,
+              3
+            ],
+            [
+              28,
+              1467,
+              13,
+              5
+            ],
+            [
+              8,
+              15,
+              711,
+              1
+            ],
+            [
+              53,
+              6,
+              1,
+              636
+            ]
+          ],
+          "labels": [
+            "success",
+            "fail",
+            "block",
+            "unknown"
+          ]
+        },
+        "real_test": {
+          "accuracy": 0.93407,
+          "macro_f1": 0.86969,
+          "weighted_f1": 0.93248,
+          "n": 91,
+          "per_class": {
+            "success": {
+              "precision": 0.95833,
+              "recall": 0.92,
+              "f1": 0.93878,
+              "support": 25
+            },
+            "fail": {
+              "precision": 0.90385,
+              "recall": 0.97917,
+              "f1": 0.94,
+              "support": 48
+            },
+            "block": {
+              "precision": 1.0,
+              "recall": 0.875,
+              "f1": 0.93333,
+              "support": 16
+            },
+            "unknown": {
+              "precision": 1.0,
+              "recall": 0.5,
+              "f1": 0.66667,
+              "support": 2
+            }
+          },
+          "confusion_matrix": [
+            [
+              23,
+              2,
+              0,
+              0
+            ],
+            [
+              1,
+              47,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              14,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              1
+            ]
+          ],
+          "labels": [
+            "success",
+            "fail",
+            "block",
+            "unknown"
+          ]
+        }
+      },
+      {
+        "seed": 2,
+        "params": 32772,
+        "synth_test": {
+          "accuracy": 0.96711,
+          "macro_f1": 0.96542,
+          "weighted_f1": 0.96702,
+          "n": 4500,
+          "per_class": {
+            "success": {
+              "precision": 0.94588,
+              "recall": 0.98843,
+              "f1": 0.96669,
+              "support": 1556
+            },
+            "fail": {
+              "precision": 0.9754,
+              "recall": 0.9696,
+              "f1": 0.97249,
+              "support": 1513
+            },
+            "block": {
+              "precision": 0.98069,
+              "recall": 0.96735,
+              "f1": 0.97397,
+              "support": 735
+            },
+            "unknown": {
+              "precision": 0.98605,
+              "recall": 0.91379,
+              "f1": 0.94855,
+              "support": 696
+            }
+          },
+          "confusion_matrix": [
+            [
+              1538,
+              15,
+              0,
+              3
+            ],
+            [
+              28,
+              1467,
+              13,
+              5
+            ],
+            [
+              7,
+              16,
+              711,
+              1
+            ],
+            [
+              53,
+              6,
+              1,
+              636
+            ]
+          ],
+          "labels": [
+            "success",
+            "fail",
+            "block",
+            "unknown"
+          ]
+        },
+        "real_test": {
+          "accuracy": 0.93407,
+          "macro_f1": 0.86969,
+          "weighted_f1": 0.93248,
+          "n": 91,
+          "per_class": {
+            "success": {
+              "precision": 0.95833,
+              "recall": 0.92,
+              "f1": 0.93878,
+              "support": 25
+            },
+            "fail": {
+              "precision": 0.90385,
+              "recall": 0.97917,
+              "f1": 0.94,
+              "support": 48
+            },
+            "block": {
+              "precision": 1.0,
+              "recall": 0.875,
+              "f1": 0.93333,
+              "support": 16
+            },
+            "unknown": {
+              "precision": 1.0,
+              "recall": 0.5,
+              "f1": 0.66667,
+              "support": 2
+            }
+          },
+          "confusion_matrix": [
+            [
+              23,
+              2,
+              0,
+              0
+            ],
+            [
+              1,
+              47,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              14,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              1
+            ]
+          ],
+          "labels": [
+            "success",
+            "fail",
+            "block",
+            "unknown"
+          ]
+        }
+      },
+      {
+        "seed": 3,
+        "params": 32772,
+        "synth_test": {
+          "accuracy": 0.96689,
+          "macro_f1": 0.96527,
+          "weighted_f1": 0.96681,
+          "n": 4500,
+          "per_class": {
+            "success": {
+              "precision": 0.94472,
+              "recall": 0.98843,
+              "f1": 0.96608,
+              "support": 1556
+            },
+            "fail": {
+              "precision": 0.97603,
+              "recall": 0.96894,
+              "f1": 0.97247,
+              "support": 1513
+            },
+            "block": {
+              "precision": 0.98069,
+              "recall": 0.96735,
+              "f1": 0.97397,
+              "support": 735
+            },
+            "unknown": {
+              "precision": 0.98605,
+              "recall": 0.91379,
+              "f1": 0.94855,
+              "support": 696
+            }
+          },
+          "confusion_matrix": [
+            [
+              1538,
+              15,
+              0,
+              3
+            ],
+            [
+              29,
+              1466,
+              13,
+              5
+            ],
+            [
+              8,
+              15,
+              711,
+              1
+            ],
+            [
+              53,
+              6,
+              1,
+              636
+            ]
+          ],
+          "labels": [
+            "success",
+            "fail",
+            "block",
+            "unknown"
+          ]
+        },
+        "real_test": {
+          "accuracy": 0.93407,
+          "macro_f1": 0.86969,
+          "weighted_f1": 0.93248,
+          "n": 91,
+          "per_class": {
+            "success": {
+              "precision": 0.95833,
+              "recall": 0.92,
+              "f1": 0.93878,
+              "support": 25
+            },
+            "fail": {
+              "precision": 0.90385,
+              "recall": 0.97917,
+              "f1": 0.94,
+              "support": 48
+            },
+            "block": {
+              "precision": 1.0,
+              "recall": 0.875,
+              "f1": 0.93333,
+              "support": 16
+            },
+            "unknown": {
+              "precision": 1.0,
+              "recall": 0.5,
+              "f1": 0.66667,
+              "support": 2
+            }
+          },
+          "confusion_matrix": [
+            [
+              23,
+              2,
+              0,
+              0
+            ],
+            [
+              1,
+              47,
+              0,
+              0
+            ],
+            [
+              0,
+              2,
+              14,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              1
+            ]
+          ],
+          "labels": [
+            "success",
+            "fail",
+            "block",
+            "unknown"
+          ]
+        }
+      }
+    ]
+  },
+  "reference": {
+    "name": "cpu",
+    "params": 138665,
+    "synth_test": {
+      "accuracy": 0.99333,
+      "macro_f1": 0.99326
+    },
+    "real_test": {
+      "accuracy": 0.94505,
+      "macro_f1": 0.87737
+    }
+  }
+}

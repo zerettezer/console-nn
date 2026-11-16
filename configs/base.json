@@ -8,6 +8,7 @@
     "hash_ngram": 3,
     "lowercase": true,
     "normalize_numbers": true,
+    "numeric_mode": "digits",
     "normalize_paths": true,
     "normalize_ips": true,
     "strip_ansi": true,
@@ -32,6 +33,7 @@
       "max_chunk_pos": 16,
       "dropout": 0.05,
       "layer_norm": true,
+      "norm": "layer",
       "scale": 1.0
     },
     "conv": {
@@ -73,6 +75,7 @@
       ],
       "chunk_hidden": 0,
       "doc_hidden": 64,
+      "head_activation": "gelu",
       "completed_head": true
     },
     "l2_embedding": 0.0
@@ -123,6 +126,8 @@
     "window_stride": 0,
     "batch_windows": 1,
     "tflite_threads": 4,
+    "benchmark_chunks": 128,
+    "doc_temperature": 1.0,
     "doc_aggregate": "mean",
     "color": "auto",
     "bar_width": 24,
@@ -136,9 +141,9 @@
     "verify_tolerance": 0.05
   },
   "synth": {
-    "n_train": 4800,
-    "n_val": 700,
-    "n_test": 700,
+    "n_train": 36000,
+    "n_val": 4500,
+    "n_test": 4500,
     "seed": 42,
     "platforms": [
       "linux",
@@ -171,7 +176,31 @@
       "backup",
       "database",
       "cloud",
-      "commands"
+      "commands",
+      "errors",
+      "real_errors",
+      "multi",
+      "multi_chain",
+      "node",
+      "npm",
+      "cargo",
+      "go",
+      "maven",
+      "gradle",
+      "dotnet",
+      "ruby",
+      "php",
+      "kubectl",
+      "helm",
+      "terraform",
+      "ansible",
+      "github_actions",
+      "gitlab_ci",
+      "jenkins",
+      "redis",
+      "postgres",
+      "mysql",
+      "nginx"
     ],
     "status_weights": {
       "success": 0.36,

@@ -92,6 +92,11 @@ def build_run_reports(run_dir: str) -> Dict:
         or {}
     )
     history = _read_history(run / "logs" / "history.csv") or existing.get("history", [])
+    calibration = _read_json(run / "calibration.json") or existing.get("calibration")
+    contrast = _read_json(run / "contrast.json") or existing.get("contrast")
+    holdout = _read_json(run / "domain_holdout.json") or existing.get(
+        "domain_holdout"
+    )
 
     existing_training = existing.get("training", {})
     metrics = {
@@ -108,6 +113,25 @@ def build_run_reports(run_dir: str) -> Dict:
         "int8_validation": validation,
         "quant": quant,
         "history": history,
+        "calibration": calibration,
+        "contrast_pair_acc": (
+            contrast.get("contrast_pair_acc") if contrast else None
+        ),
+        "contrast": (
+            {
+                "pairs": contrast.get("pairs"),
+                "contrast_pair_acc": contrast.get("contrast_pair_acc"),
+                "verdict_change_rate": contrast.get("verdict_change_rate"),
+            }
+            if contrast else None
+        ),
+        "domain_holdout": (
+            {
+                "summary": holdout.get("summary"),
+                "table": holdout.get("table"),
+            }
+            if holdout else None
+        ),
     }
     run.mkdir(parents=True, exist_ok=True)
     (run / "metrics.json").write_text(
@@ -161,6 +185,29 @@ def render_run_log(metrics: Dict, benchmark: Dict) -> str:
         lines.append(
             f"  {row.get('mode', '-'):8s} {row.get('ms_per_window', 0):.3f} ms/window  "
             f"{row.get('tokens_per_second', 0):,} tok/s  {row.get('size_kb', 0):.1f} KB"
+        )
+    calibration = metrics.get("calibration")
+    if calibration:
+        lines.extend(
+            [
+                "",
+                "calibration:",
+                f"  temperature       : {_fmt(calibration.get('temperature'), 4)}",
+                f"  ECE synth val     : "
+                f"{_fmt(calibration.get('synth_val', {}).get('ece_after', {}).get('ece'))}",
+                f"  ECE real val      : "
+                f"{_fmt(calibration.get('real_val', {}).get('ece_after', {}).get('ece'))}",
+            ]
+        )
+    if metrics.get("contrast_pair_acc") is not None:
+        lines.append(
+            f"contrast pair acc    : {_fmt(metrics.get('contrast_pair_acc'))}"
+        )
+    holdout = metrics.get("domain_holdout")
+    if holdout:
+        summary = holdout.get("summary", {})
+        lines.append(
+            f"domain holdout macro : {_fmt(summary.get('macro_doc_accuracy'))}"
         )
     if metrics.get("history"):
         lines.extend(["", "epochs:"])

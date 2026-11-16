@@ -1210,15 +1210,21 @@ from .synth_commands import COMMAND_GENERATORS  # noqa: E402
 from .synth_errors import ERROR_GENERATORS  # noqa: E402
 from .synth_real_errors import REAL_ERROR_GENERATORS  # noqa: E402
 from .synth_multi import MULTI_GENERATORS  # noqa: E402
+from .synth_modern import MODERN_GENERATORS  # noqa: E402
 
 _GENERATORS.update(EXTRA_GENERATORS)
 _GENERATORS.update(COMMAND_GENERATORS)
 _GENERATORS.update(ERROR_GENERATORS)
 _GENERATORS.update(REAL_ERROR_GENERATORS)
 _GENERATORS.update(MULTI_GENERATORS)
+_GENERATORS.update(MODERN_GENERATORS)
 
 _WINDOWS_ONLY = {"windows_cmd", "powershell", "windows_update"}
-_LINUX_ONLY = {"shell", "package", "systemd", "kernel", "journal", "docker", "git"}
+_LINUX_ONLY = {
+    "shell", "package", "systemd", "kernel", "journal", "docker", "git",
+    "kubectl", "helm", "terraform", "ansible", "github_actions", "gitlab_ci",
+    "jenkins", "redis", "postgres", "mysql", "nginx",
+}
 
 
 def _postprocess(

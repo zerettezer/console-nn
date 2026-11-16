@@ -106,6 +106,15 @@ def evaluate_dataset(model, dataset, class_names: Sequence[str], completed=True)
     return evaluate_arrays(pred, class_names)
 
 
+def evaluate_documents(model, tokenizer, cfg, documents: Sequence[Dict]) -> Dict:
+    """Evaluate a model on an in-memory document list."""
+    encoded = encode_split(documents, tokenizer, cfg, stride=cfg.data.eval_stride)
+    dataset = make_dataset(encoded, cfg, cfg.train.batch_size, shuffle=False)
+    return evaluate_dataset(
+        model, dataset, cfg.model.heads.class_names, cfg.model.heads.completed_head
+    )
+
+
 def resolve_model_dir(run_dir: str) -> Path:
     """Accept either a run folder or its self-contained ``model/`` folder."""
     run = Path(run_dir)

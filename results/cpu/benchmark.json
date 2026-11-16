@@ -1,0 +1,22 @@
+{
+  "run": "artifacts/cpu",
+  "cpu": "AMD Ryzen 7 5700X 8-Core Processor",
+  "threads": 4,
+  "iterations": 200,
+  "window_chunks": 128,
+  "results": [
+    {
+      "mode": "int8",
+      "file": "model_int8.tflite",
+      "size_kb": 180.5,
+      "input_shape": [
+        1,
+        128,
+        16
+      ],
+      "tokens_per_window": 2048,
+      "ms_per_window": 2.47,
+      "tokens_per_second": 829031
+    }
+  ]
+}

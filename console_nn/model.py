@@ -272,8 +272,13 @@ class ConsoleFCN(tf.keras.layers.Layer):
             self.completed_head = tf.keras.layers.Dense(1, name="completed_logits")
         self._doc_in = doc_in
 
-    def call(self, inputs, training=None):
-        ids = inputs                                     # [B, C, T]
+    def encode_chunks(self, ids, training=None):
+        """Run the shared backbone and the chunk head.
+
+        Returns ``(chunk_feat, chunk_logits, chunk_mask)`` with shapes
+        ``[B, C, F]``, ``[B, C, K]`` and ``[B, C]``.  The document head is
+        kept separate so a caller can pool chunks incrementally.
+        """
         b = tf.shape(ids)[0]
         c = tf.shape(ids)[1]
         t = tf.shape(ids)[2]
@@ -298,6 +303,11 @@ class ConsoleFCN(tf.keras.layers.Layer):
         chunk_feat = tf.reshape(
             chunk_feat, (-1, c, tf.shape(chunk_feat)[-1])
         )
+        return chunk_feat, chunk_logits, chunk_mask
+
+    def document_logits(self, chunk_feat, chunk_mask, chunk_logits,
+                        training=None):
+        """Pool chunk features and run the document/completion heads."""
         doc_feat = _masked_pool(
             chunk_feat, chunk_mask, self.cfg.model.pool.doc_pool, "doc_pool"
         )
@@ -318,6 +328,14 @@ class ConsoleFCN(tf.keras.layers.Layer):
         if self.completed_head is not None:
             outputs["completed_logits"] = self.completed_head(doc_feat)
         return outputs
+
+    def call(self, inputs, training=None):
+        chunk_feat, chunk_logits, chunk_mask = self.encode_chunks(
+            inputs, training=training
+        )
+        return self.document_logits(
+            chunk_feat, chunk_mask, chunk_logits, training=training
+        )
 
     def get_config(self):
         return {"vocab_size": self.vocab_size}

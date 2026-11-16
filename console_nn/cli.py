@@ -131,6 +131,62 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--data", default="data/synth")
     _add_common(p)
 
+    # baselines / ablations ----------------------------------------
+    p = sub.add_parser("baseline", help="regex and hashed n-gram baselines")
+    p.add_argument("--data", default="data/mixed")
+    p.add_argument("--real", default="data/real")
+    p.add_argument("--run", default="artifacts/cpu")
+    p.add_argument("--seeds", default="1,2,3")
+    p.add_argument("--buckets", type=int, default=8192)
+    p.add_argument("--epochs", type=int, default=8)
+    p.add_argument("--out", default="artifacts/cpu/baselines.json")
+
+    p = sub.add_parser("ablate", help="one-change ablations of the CPU model")
+    p.add_argument("--config", default="configs/cpu.json")
+    p.add_argument("--data", default="data/mixed")
+    p.add_argument("--real", default="data/real")
+    p.add_argument("--out", default="artifacts/cpu/ablations.json")
+    p.add_argument("--seeds", default="1,2,3")
+    p.add_argument("--epochs", type=int, default=4)
+    p.add_argument("--steps", type=int, default=250, dest="steps_per_epoch")
+    p.add_argument("--validation-steps", type=int, default=60)
+    p.add_argument(
+        "--variants",
+        default="cpu_control,no_digit_tokens,no_factorized_embedding",
+    )
+
+    # calibration / contrast ---------------------------------------
+    p = sub.add_parser("calibrate", help="fit document-head temperature")
+    p.add_argument("--run", default="artifacts/cpu")
+    p.add_argument("--data", default="data/mixed")
+    p.add_argument("--real", default="data/real")
+    p.add_argument("--split", default="val", choices=["train", "val", "test"])
+    p.add_argument("--no-apply", action="store_true",
+                   help="report the temperature without editing weights")
+    p.add_argument("--requantize", action="store_true",
+                   help="re-export int8 and verify the graph is unchanged")
+    p.add_argument("--validate", action="store_true",
+                   help="run the int8 quality gate after calibration")
+    p.add_argument("--benchmark", action="store_true",
+                   help="compare int8 latency before and after calibration")
+    p.add_argument("--out", default=None)
+
+    p = sub.add_parser("contrast", help="score same-command contrast pairs")
+    p.add_argument("--run", default="artifacts/cpu")
+    p.add_argument("--data", default="data/mixed")
+    p.add_argument("--split", default="test", choices=["train", "val", "test"])
+    p.add_argument("--max-pairs", type=int, default=500)
+    p.add_argument("--out", default="artifacts/cpu/contrast.json")
+
+    # streaming -----------------------------------------------------
+    p = sub.add_parser("stream", help="feed a log in chunks and show latency")
+    p.add_argument("--run", default=None)
+    p.add_argument("-f", "--file", default=None, help="log file, '-' for stdin")
+    p.add_argument("--chunk", type=int, default=256,
+                   help="characters per feed call")
+    p.add_argument("--tflite", nargs="?", const=True, default=None)
+    p.add_argument("--json", action="store_true")
+
     return parser
 
 
@@ -341,6 +397,180 @@ def cmd_dataset_stats(args) -> int:
     return 0
 
 
+def cmd_baseline(args) -> int:
+    from .baselines import run_baselines, synthetic_test_documents
+    from .config import load_config
+    from .data import load_documents
+    from .evaluate import evaluate_documents, load_run, resolve_model_dir
+
+    cfg_path = Path(resolve_model_dir(args.run)) / "config.json"
+    cfg = load_config(str(cfg_path))
+    names = list(cfg.model.heads.class_names)
+    seeds = [int(s) for s in args.seeds.split(",") if s.strip()]
+    payload = run_baselines(
+        args.data,
+        args.real,
+        names,
+        seeds=seeds,
+        buckets=args.buckets,
+        epochs=args.epochs,
+    )
+    try:
+        model, tokenizer, run_cfg = load_run(args.run)
+        synth_ref = evaluate_documents(
+            model, tokenizer, run_cfg, synthetic_test_documents(args.data)
+        )
+        real_ref = evaluate_documents(
+            model, tokenizer, run_cfg, load_documents(args.real, "test")
+        )
+        payload["reference"] = {
+            "name": "cpu",
+            "params": model.count_params(),
+            "synth_test": {
+                "accuracy": synth_ref["doc"]["accuracy"],
+                "macro_f1": synth_ref["doc"]["macro_f1"],
+            },
+            "real_test": {
+                "accuracy": real_ref["doc"]["accuracy"],
+                "macro_f1": real_ref["doc"]["macro_f1"],
+            },
+        }
+    except FileNotFoundError:
+        payload["reference"] = None
+    Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+    Path(args.out).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(payload, indent=2))
+    return 0
+
+
+def cmd_ablate(args) -> int:
+    from .baselines import run_ablations, synthetic_test_documents
+    from .data import load_documents
+    from .evaluate import evaluate_documents, load_run
+
+    seeds = [int(s) for s in args.seeds.split(",") if s.strip()]
+    variants = [v.strip() for v in args.variants.split(",") if v.strip()]
+    payload = run_ablations(
+        args.config,
+        args.data,
+        args.real,
+        args.out,
+        seeds=seeds,
+        epochs=args.epochs,
+        steps_per_epoch=args.steps_per_epoch,
+        validation_steps=args.validation_steps,
+        variants=variants,
+    )
+    payload["reference"] = None
+    try:
+        model, tokenizer, run_cfg = load_run("artifacts/cpu")
+        synth_ref = evaluate_documents(
+            model, tokenizer, run_cfg, synthetic_test_documents(args.data)
+        )
+        real_ref = evaluate_documents(
+            model, tokenizer, run_cfg, load_documents(args.real, "test")
+        )
+        payload["reference"] = {
+            "name": "cpu",
+            "synth_test": {
+                "accuracy": synth_ref["doc"]["accuracy"],
+                "macro_f1": synth_ref["doc"]["macro_f1"],
+                "chunk_accuracy": synth_ref["chunk"]["accuracy"],
+            },
+            "real_test": {
+                "accuracy": real_ref["doc"]["accuracy"],
+                "macro_f1": real_ref["doc"]["macro_f1"],
+                "chunk_accuracy": real_ref["chunk"]["accuracy"],
+            },
+        }
+    except FileNotFoundError:
+        pass
+    Path(args.out).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(payload, indent=2))
+    return 0
+
+
+def cmd_calibrate(args) -> int:
+    from .calibration import calibrate_run
+
+    report = calibrate_run(
+        args.run,
+        args.data,
+        real_dir=args.real,
+        split=args.split,
+        apply=not args.no_apply,
+        requantize=args.requantize,
+        validate=args.validate,
+        benchmark=args.benchmark,
+    )
+    if args.out:
+        Path(args.out).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    summary = {
+        "temperature": report["temperature"],
+        "synth_val_ece_before": report["synth_val"]["ece_before"]["ece"],
+        "synth_val_ece_after": report["synth_val"]["ece_after"]["ece"],
+        "real_val_ece_before": report["real_val"]["ece_before"]["ece"],
+        "real_val_ece_after": report["real_val"]["ece_after"]["ece"],
+        "applied": report["applied"],
+    }
+    print(json.dumps(summary, indent=2))
+    return 0
+
+
+def cmd_contrast(args) -> int:
+    from .contrast import evaluate_contrast
+
+    report = evaluate_contrast(
+        args.run, args.data, split=args.split, max_pairs=args.max_pairs
+    )
+    Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+    Path(args.out).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    print(
+        json.dumps(
+            {
+                "pairs": report["pairs"],
+                "contrast_pair_acc": report["contrast_pair_acc"],
+                "verdict_change_rate": report["verdict_change_rate"],
+            },
+            indent=2,
+        )
+    )
+    return 0
+
+
+def cmd_stream(args) -> int:
+    from .api import ConsoleAnalyzer
+
+    analyzer = ConsoleAnalyzer(model_dir=args.run, tflite=args.tflite)
+    stream = analyzer.stream()
+    if args.file and args.file != "-":
+        text = Path(args.file).read_text(encoding="utf-8", errors="replace")
+    else:
+        text = sys.stdin.read()
+    result = None
+    for start in range(0, len(text), max(1, args.chunk)):
+        result = stream.feed(text[start : start + args.chunk])
+    result = stream.flush()
+    payload = {
+        "status": result.status,
+        "confidence": round(result.confidence, 6),
+        "completed": result.completed,
+        "lines": len(result.lines),
+        "tokens": result.n_tokens,
+        "chunks": result.n_chunks,
+        "feeds": (len(text) + max(1, args.chunk) - 1) // max(1, args.chunk),
+        "mean_chunk_latency_ms": round(stream.mean_chunk_latency_ms, 4),
+        "single_chunk_latency_ms": round(stream.measure_chunk_latency(), 4),
+        "last_latency_ms": round(stream.last_latency_ms, 4),
+    }
+    if args.json:
+        print(json.dumps(payload, indent=2))
+    else:
+        print(result.to_brief())
+        print(json.dumps(payload, indent=2))
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -358,6 +588,11 @@ def main(argv: Optional[List[str]] = None) -> int:
         "benchmark": cmd_benchmark,
         "models": cmd_models,
         "dataset-stats": cmd_dataset_stats,
+        "baseline": cmd_baseline,
+        "ablate": cmd_ablate,
+        "calibrate": cmd_calibrate,
+        "contrast": cmd_contrast,
+        "stream": cmd_stream,
     }
     return handlers[args.command](args)
 

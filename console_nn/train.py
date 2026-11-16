@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import time
 from pathlib import Path
@@ -28,6 +29,27 @@ def set_seed(seed: int) -> None:
     tf.random.set_seed(seed)
 
 
+def configure_gpu(memory_mb: int = 0) -> None:
+    """Configure GPU allocation before the first TensorFlow GPU operation.
+
+    ``0`` enables memory growth.  A positive value caps this process on every
+    visible GPU, which makes small concurrent training jobs predictable.
+    """
+    limit = int(memory_mb or os.environ.get("CONSOLE_NN_GPU_MEMORY_MB", 0) or 0)
+    for gpu in tf.config.list_physical_devices("GPU"):
+        try:
+            if limit > 0:
+                tf.config.set_logical_device_configuration(
+                    gpu,
+                    [tf.config.LogicalDeviceConfiguration(memory_limit=limit)],
+                )
+            else:
+                tf.config.experimental.set_memory_growth(gpu, True)
+        except RuntimeError:
+            # TensorFlow was already initialised in this process.
+            pass
+
+
 def _history_to_dict(history) -> Dict[str, list]:
     return {k: [float(x) for x in v] for k, v in history.history.items()}
 
@@ -47,14 +69,9 @@ def train_model(
     for folder in (run, model_dir, logs, metrics_dir, reports_dir):
         folder.mkdir(parents=True, exist_ok=True)
     verbose = cfg.train.verbose if verbose is None else verbose
+    configure_gpu(cfg.train.gpu_memory_mb)
     set_seed(cfg.data.seed)
     save_config(cfg, str(model_dir / "config.json"))
-
-    for gpu in tf.config.list_physical_devices("GPU"):
-        try:
-            tf.config.experimental.set_memory_growth(gpu, True)
-        except RuntimeError:
-            pass
     if cfg.train.mixed_precision:
         tf.keras.mixed_precision.set_global_policy("mixed_float16")
 

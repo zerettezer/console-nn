@@ -166,6 +166,9 @@ class TrainConfig:
     steps_per_epoch: int = 0        # 0 = full dataset
     validation_steps: int = 0
     mixed_precision: bool = False   # float16 compute on GPU
+    # 0 = TensorFlow memory growth; >0 caps this process on every GPU.
+    # A cap lets several small models share one GPU without preallocating it.
+    gpu_memory_mb: int = 0
     jit_compile: bool = False
     verbose: int = 1
     log_csv: str = "history.csv"
@@ -180,6 +183,9 @@ class InferenceConfig:
     batch_windows: int = 1
     tflite_threads: int = 4
     benchmark_chunks: int = 128    # only for latency measurement
+    # Temperature applied to the final document Dense layer at export time.
+    # 1.0 means raw (uncalibrated) logits.
+    doc_temperature: float = 1.0
     # How document-level predictions from overlapping windows are combined.
     doc_aggregate: str = "mean"    # mean | max_severity
     color: str = "auto"            # auto | always | never
@@ -198,9 +204,9 @@ class QuantConfig:
 
 @dataclass
 class SynthConfig:
-    n_train: int = 24000
-    n_val: int = 3000
-    n_test: int = 3000
+    n_train: int = 36000
+    n_val: int = 4500
+    n_test: int = 4500
     seed: int = 42
     platforms: List[str] = field(default_factory=lambda: ["linux", "windows"])
     domains: List[str] = field(
@@ -211,6 +217,11 @@ class SynthConfig:
             "package_update", "compile", "media", "data_process", "archive",
             "backup", "database", "cloud", "commands", "errors", "real_errors",
             "multi", "multi_chain",
+            # modern language, orchestration and data-service families
+            "node", "npm", "cargo", "go", "maven", "gradle", "dotnet",
+            "ruby", "php", "kubectl", "helm", "terraform", "ansible",
+            "github_actions", "gitlab_ci", "jenkins", "redis", "postgres",
+            "mysql", "nginx",
         ]
     )
     status_weights: Dict[str, float] = field(

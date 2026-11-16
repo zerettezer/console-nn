@@ -111,6 +111,27 @@ class ModelTest(unittest.TestCase):
         out_pad = model(padded, training=False)
         self.assertLess(float(np.max(np.abs(out_pad["doc_logits"]))), 100.0)
 
+    def test_split_heads_match_full_call(self):
+        cfg = load_config(str(ROOT / "configs" / "cpu.json"))
+        model = build_model(cfg, 3000)
+        ids = np.random.randint(1, 3000, size=(2, 5, 16)).astype(np.int32)
+        full = model(ids, training=False)
+        root = model.get_layer("console_fcn")
+        feat, chunk_logits, mask = root.encode_chunks(ids, training=False)
+        split = root.document_logits(feat, mask, chunk_logits, training=False)
+        np.testing.assert_allclose(
+            split["chunk_logits"].numpy(), full["chunk_logits"].numpy(),
+            rtol=1e-5, atol=1e-5,
+        )
+        np.testing.assert_allclose(
+            split["doc_logits"].numpy(), full["doc_logits"].numpy(),
+            rtol=1e-5, atol=1e-5,
+        )
+        np.testing.assert_allclose(
+            split["completed_logits"].numpy(), full["completed_logits"].numpy(),
+            rtol=1e-5, atol=1e-5,
+        )
+
 
 class VizTest(unittest.TestCase):
     def _result(self):

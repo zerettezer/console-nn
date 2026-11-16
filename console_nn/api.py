@@ -317,6 +317,11 @@ class ConsoleAnalyzer:
     def analyze_file(self, path: Union[str, Path]) -> LogAnalysis:
         return self.analyze(Path(path).read_text(encoding="utf-8", errors="replace"))
 
+    def stream(self):
+        from .stream import StreamAnalyzer
+
+        return StreamAnalyzer(self)
+
     def analyze_command(
         self,
         command: Union[str, Sequence[str]],
