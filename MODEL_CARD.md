@@ -18,7 +18,8 @@ No recurrence, no attention, no fixed sequence length.
 
 ## Data
 
-- 45,000 synthetic documents (36k/4.5k/4.5k).
+- 45,000 synthetic documents (36k/4.5k/4.5k). Exact duplicates are removed
+  from the mixed splits, with test taking priority over validation and train.
 - 201 real Linux sessions collected by `tools/collect_real.py` (safe local
   commands in a temp workspace), 147 curated Linux/Windows transcripts from
   `examples/corpora/curated`, plus 23 concrete example sessions.
@@ -64,8 +65,9 @@ split into float and int8, including per-class precision/recall/F1, confusion
 matrix, chunk accuracy, completion accuracy, agreement and probability delta.
 `console_nn validate --strict` enforces the int8 gate.
 
-Real held-out test (`data/real`, 91 sessions): document accuracy 94.51%,
-document macro F1 87.74%, chunk accuracy 58.47%, completion accuracy 82.42%.
+Real/curated held-out test (`data/real`, 85 sessions): document accuracy
+90.59%, document macro F1 77.57%, chunk accuracy 57.37%, completion accuracy
+87.06%.
 The split contains two `unknown` examples and mixes collected, curated and
 example sessions.
 
@@ -85,15 +87,12 @@ Additional evaluations:
 
 ### Evaluation snapshot (CPU checkpoint)
 
-- Domain holdout: macro document accuracy **75.25%** over 7 held-out families
-  (64.28% to 86.41% per family), 4591 documents.
-- Baselines: regex 67.38% synthetic / 82.42% real; hashed 1-3 gram logistic
-  regression 96.70% / 93.41%; CPU FCN 99.33% / 94.50%.
-- Same-budget ablation control: 98.30% synthetic.
-- Calibration: temperature 0.8021; ECE synthetic val 0.00350 -> 0.00187;
-  real val 0.13944 -> 0.13047 (n=34).
+- Domain holdout: macro document accuracy **77.34%** over 7 held-out families (68.09% to 88.86% per family), 4584 documents.
+- Baselines: regex 67.39% synthetic / 84.71% real; hashed 1-3 gram logistic regression 96.79% / 88.23%; CPU FCN 98.95% / 90.59%.
+- Same-budget ablation control: 98.31% synthetic.
+- Calibration: temperature 1.0846; ECE synthetic val 0.00314 -> 0.00320; real val 0.10901 -> 0.10705 (n=43).
 - int8 graph unchanged: 104 -> 104 ops.
-- Contrast pairs: 500 same-command pairs, contrast_pair_acc 98.60%.
+- Contrast pairs: 500 same-command pairs, contrast_pair_acc 97.60%.
 
 ## int8 deployment
 
@@ -101,6 +100,20 @@ TFLite input: `[1, C, 16]` int32, dynamic `C`. int8 weights, float
 activations. `console_nn benchmark` records CPU latency and size.
 `console_nn doctor --strict` verifies hashes, tokenizer/config, dynamic shape,
 one TFLite invocation and a smoke classification.
+
+## Evaluation caveats
+
+- The 85-session real test is too small to separate the FCN from hashed
+  n-gram logistic regression: 77/85 vs 75/85, McNemar `p = 0.625`.
+- Domain-holdout runs use a reduced budget (4 x 250); the production CPU model
+  uses 10 x 600. The full-data budget control differs by about 0.6 pp, so the
+  77.34% holdout macro is dominated by domain shift.
+- Risk-coverage is measured on synthetic validation (4489 documents), not on
+  the 43 real validation sessions.
+- The pre-clean corpus had exact train/test and train/val duplicates. The
+  current mixed corpus is deduplicated, curated commands do not cross splits,
+  and the model was retrained; `results/cpu/split_audit.json` reports zero
+  exact and zero command-level cross-split overlap.
 
 ## Failure modes
 

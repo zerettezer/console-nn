@@ -3,19 +3,19 @@
   "model_dir": "console_nn/pretrained/cpu",
   "files": {
     "config.json": {
-      "sha256": "38ded48f0427eab04b6bef03d016128a017641d3dcb316083654f921819c6052",
-      "bytes": 4403
+      "sha256": "66e90bf8a7eb71e2a7db2e89b266d0b19aa1a6f72b7b257bfe6f8a1ac2770729",
+      "bytes": 4402
     },
     "tokenizer.json": {
-      "sha256": "780b47c96295eca21cd89c50691b746f893184bc44b7c154519ab6f44043da7d",
-      "bytes": 41143
+      "sha256": "3acc7c2376db7647618389f89758aba99f3475f674e0046dfbcd5289fd253fbf",
+      "bytes": 41141
     },
     "weights.h5": {
-      "sha256": "a47c3a6de26aad513234c9691b01b03ebed1913c3f8b8d12208b38518869f24b",
+      "sha256": "75f457ee1a195f05aef012736c40e98f1cc5b97ea561610399331afb562bfec8",
       "bytes": 591472
     },
     "model_int8.tflite": {
-      "sha256": "045c368ccc0b5fc6e86ae4f30d8c2c072008f1b0d629909471ea9f57d0d751af",
+      "sha256": "2e03c798b58c73bdf30f24a493103f7019fd989d6f9689636dbc86da69f81567",
       "bytes": 184880
     }
   },

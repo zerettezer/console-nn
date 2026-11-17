@@ -15,8 +15,8 @@
         16
       ],
       "tokens_per_window": 2048,
-      "ms_per_window": 6.024,
-      "tokens_per_second": 339962
+      "ms_per_window": 5.782,
+      "tokens_per_second": 354231
     }
   ]
 }

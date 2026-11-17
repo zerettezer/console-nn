@@ -3,7 +3,7 @@
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?logo=tensorflow&logoColor=white)](https://www.tensorflow.org/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-33%20passing-brightgreen)](tests/)
+[![Tests](https://img.shields.io/badge/tests-34%20passing-brightgreen)](tests/)
 
 Length-unlimited console-log classification with a small fully-convolutional
 network. The model labels 16-token chunks (`success` / `fail` / `block` /
@@ -23,19 +23,19 @@ print(result.to_brief())
 
 ## Results
 
-All three checkpoints were retrained on the cleaned mixed corpus. `cpu` and
-`rms` use 15 and 10 epochs; `base` uses 10 epochs.
+All three checkpoints were retrained on the deduplicated mixed corpus. `cpu`
+and `rms` stopped after 10 and 8 epochs; `base` ran 10 epochs.
 
 | variant | vocab | params | fp32 | int8 | float doc | int8 doc | int8 chunk | latency / 2048 tokens |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `base` | 5000 | 506,953 | 1.93 MB | 600 KB | **99.46%** | **99.46%** | 68.36% | 10.457 ms |
-| `cpu` | 3000 | 138,665 | 0.53 MB | **180 KB** | 99.24% | 99.24% | 67.24% | **2.470 ms** |
-| `rms` | 3000 | 163,305 | 0.62 MB | 220 KB | 98.93% | 98.91% | 65.55% | 6.024 ms |
+| `base` | 5000 | 506,953 | 1.93 MB | 600 KB | **99.30%** | **99.30%** | 68.30% | 10.292 ms |
+| `cpu` | 3000 | 138,665 | 0.53 MB | **180 KB** | 98.80% | 98.80% | 66.92% | **2.152 ms** |
+| `rms` | 3000 | 163,305 | 0.62 MB | 220 KB | 98.98% | 98.93% | 65.99% | 5.782 ms |
 
 - CPU: AMD Ryzen 7 5700X, 4 TFLite threads, 200 iterations.
-- `cpu`: 15 epochs, 318.7 s training, 829k tokens/s at inference.
-- Real held-out test (91 sessions): **94.51% document accuracy**, 87.74%
-  macro-F1, 58.47% chunk accuracy, 82.42% completion accuracy.
+- `cpu`: 10 epochs, 245.8 s training, 951k tokens/s at inference.
+- Real/curated held-out test (85 sessions): **90.59% document accuracy**,
+  77.57% macro-F1, 57.37% chunk accuracy, 87.06% completion accuracy.
 - Metrics: `results/<variant>/metrics.json`; the full training log is written
   to `artifacts/<variant>/run.log` locally.
 
@@ -193,10 +193,10 @@ completion head: Dense(1) → sigmoid
 data/synth/train.jsonl  36000 documents  10.19 lines avg
 data/synth/val.jsonl     4500 documents  12.67 lines avg
 data/synth/test.jsonl    4500 documents  15.73 lines avg
-data/real/train.jsonl     246 sessions (141 collected + 105 curated)
-data/real/val.jsonl        34 sessions (20 collected + 14 curated)
-data/real/test.jsonl       91 sessions (40 collected + 28 curated + 23 examples)
-data/mixed/                 synthetic + real (36246 / 4534 / 4591)
+data/real/train.jsonl     243 sessions (141 collected + 102 curated)
+data/real/val.jsonl        43 sessions (20 collected + 23 curated)
+data/real/test.jsonl       85 sessions (40 collected + 22 curated + 23 examples)
+data/mixed/                 deduplicated synthetic + real (36105 / 4532 / 4584)
 ```
 
 Synthetic train status: success 12373, fail 12583, block 5836, unknown 5208.
@@ -256,9 +256,9 @@ configs/rms.json    3000 vocab, 163k params, RMSNorm
 
 | variant | data | epochs | train time | float doc | float chunk | completion |
 |---|---|---:|---:|---:|---:|---:|
-| base | mixed | 10 | 490.2 s | 99.46% | 68.36% | 98.39% |
-| cpu | mixed | 15 | 318.7 s | 99.24% | 67.24% | 98.21% |
-| rms | mixed | 10 | 240.4 s | 98.93% | 65.55% | 98.11% |
+| base | mixed | 10 | 830.6 s | 99.30% | 68.30% | 98.39% |
+| cpu | mixed | 10 | 245.8 s | 98.80% | 66.92% | 97.86% |
+| rms | mixed | 8 | 321.3 s | 98.98% | 65.99% | 98.34% |
 
 ```bash
 python -m console_nn train --config configs/cpu.json --data data/mixed --out artifacts/cpu
@@ -279,6 +279,7 @@ distributions. Four additional checks are produced by the commands below:
 | domain holdout | `tools/eval_domain_holdout.py` | `results/cpu/domain_holdout.json` |
 | baselines and ablations | `console_nn baseline`, `console_nn ablate` | `results/cpu/baselines.json`, `results/cpu/ablations.json` |
 | calibration and contrast | `console_nn calibrate`, `console_nn contrast` | `results/cpu/calibration.json`, `results/cpu/contrast.json` |
+| real-test breakdown | `tools/audit_splits.py`, paired evaluation | `results/cpu/real_test.json`, `results/cpu/split_audit.json` |
 
 The domain holdout removes one of seven command families, trains the CPU
 configuration for three seeds, tests only on the unseen family and reports
@@ -293,53 +294,43 @@ and is intentionally ignored by git.
 
 ### Domain holdout
 
-Seven families, 3 seeds each, 4 epochs x 250 steps, 1000 bootstrap
-samples. The held-out family is absent from train and validation.
+Seven families, 3 seeds each, 4 epochs x 250 steps, 1000 bootstrap samples. The held-out family is absent from train and validation.
 
 | held-out group | docs | doc acc | 95% CI | completion | 95% CI |
 |---|---:|---:|---|---:|---|
-| python | 385 | 86.41% | 83.72% - 88.92% | 92.38% | 89.87% - 94.72% |
-| build_package | 631 | 75.28% | 72.21% - 78.29% | 95.83% | 94.56% - 97.04% |
-| system | 641 | 76.75% | 74.36% - 79.51% | 94.33% | 92.82% - 95.84% |
-| data_infra | 1056 | 76.64% | 74.21% - 79.01% | 91.19% | 89.49% - 92.71% |
-| windows_misc | 700 | 74.86% | 71.76% - 77.76% | 88.71% | 86.52% - 90.72% |
-| language_ecosystems | 549 | 72.56% | 68.91% - 75.96% | 98.48% | 97.39% - 99.45% |
-| orchestration | 629 | 64.28% | 60.84% - 67.94% | 90.25% | 88.13% - 92.21% |
+| python | 389 | 88.86% | 86.29% - 91.34% | 92.72% | 90.57% - 95.03% |
+| build_package | 631 | 79.87% | 76.91% - 82.57% | 93.13% | 91.28% - 94.88% |
+| system | 640 | 78.75% | 75.94% - 81.25% | 92.19% | 90.26% - 94.12% |
+| data_infra | 1049 | 76.45% | 74.10% - 78.74% | 90.75% | 89.10% - 92.44% |
+| windows_misc | 698 | 75.55% | 72.54% - 78.51% | 89.92% | 87.78% - 91.83% |
+| language_ecosystems | 546 | 73.81% | 70.70% - 76.92% | 97.92% | 96.70% - 98.84% |
+| orchestration | 631 | 68.09% | 65.03% - 71.26% | 90.81% | 88.48% - 92.71% |
 
-Macro document accuracy across groups: **75.25%** (4591 held-out documents).
-
+Macro document accuracy across groups: **77.34%** (4584 held-out documents).
 ### Baselines and ablations
 
-Baselines use the same train split; ablations use a same-budget control
-(`cpu`, 4 epochs x 250 steps, 3 seeds).
+Baselines use the same train split; ablations use a same-budget control (`cpu`, 4 epochs x 250 steps, 3 seeds).
 
 | method | params | synth doc acc | synth macro F1 | real doc acc | real macro F1 |
 |---|---:|---:|---:|---:|---:|
-| regex keywords | 0 | 67.38% | 56.62% | 82.42% | 60.48% |
-| hashed word 1-3 gram LR | 32,772 | 96.70% | 96.54% | 93.41% | 86.97% |
-| cpu FCN (15 epochs) | 138,665 | 99.33% | 99.33% | 94.50% | 87.74% |
-| cpu control (4 epochs) | 138,665 | 98.30% +/- 0.34 pp | 98.12% | 90.48% | 78.48% |
-| no digit tokens | 138,665 | 98.21% +/- 0.11 pp | 98.04% | 88.64% | 81.07% |
-| no factorized embedding | 232,617 | 98.07% +/- 0.55 pp | 97.90% | 91.57% | 82.73% |
+| regex keywords | 0 | 67.39% | 56.63% | 84.71% | 62.51% |
+| hashed word 1-3 gram LR | 32,772 | 96.79% | 96.64% | 88.23% | 74.61% |
+| cpu FCN (10 epochs) | 138,665 | 98.95% | 98.83% | 90.59% | 77.57% |
+| cpu control (4 epochs) | 138,665 | 98.31% +/- 0.17 pp | 98.17% | 89.80% | 78.74% |
+| no digit tokens | 138,665 | 98.46% +/- 0.30 pp | 98.31% | 88.23% | 77.24% |
+| no factorized embedding | 232,617 | 98.56% +/- 0.12 pp | 98.45% | 89.02% | 79.66% |
 
-Same-budget control: synth 98.30%, real 90.48%.
-
+Same-budget control: synth 98.31%, real 89.80%.
 ### Calibration and contrast
 
-- Temperature: **0.8021** on 4500 synthetic validation documents
-  (NLL 0.01730 -> 0.01641).
-- ECE synthetic val: 0.00350 -> 0.00187.
-- ECE real val (n=34): 0.13944 -> 0.13047. This split is small and is
-  deliberately different from the synthetic distribution.
-- Unknown risk-coverage: at unknown precision 96.85%, coverage 84.47% and
-  selective risk 0.50%.
-- int8 graph: 104 -> 104 ops (unchanged).
-- int8 latency: 2.217 -> 2.244 ms per window around calibration; the saved
-  benchmark is 2.470 ms.
+- Temperature: **1.0846** on 4489 synthetic validation documents (NLL 0.03423 -> 0.03400).
+- ECE synthetic val: 0.00314 -> 0.00320.
+- ECE real val (n=43): 0.10901 -> 0.10705.
+- Unknown risk-coverage: at unknown precision 96.57%, coverage 84.41% and selective risk 0.82%.
+- int8 graph: 104 -> 104 ops (unchanged: True).
+- int8 latency: 2.319 -> 2.300 ms per window.
 - int8 gate after calibration: **PASS**.
-- Contrast pairs: 500 same-command pairs; **contrast_pair_acc 98.60%**,
-  verdict changed on 99.20% of pairs.
-
+- Contrast pairs: 500 same-command pairs; **contrast_pair_acc 97.60%**, verdict changed on 98.60% of pairs.
 ## Validation
 
 `validate` compares float and int8 and reports document/chunk/completion
@@ -348,24 +339,55 @@ probability delta.
 
 | variant | float doc | int8 doc | doc drop | int8 doc F1 | int8 chunk | int8 completion | chunk agreement | gate |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| base | 99.46% | 99.46% | 0.00 pp | 99.40% | 68.36% | 98.39% | 99.94% | PASS |
-| cpu | 99.24% | 99.24% | 0.00 pp | 99.23% | 67.24% | 98.21% | 99.81% | PASS |
-| rms | 98.93% | 98.91% | -0.02 pp | 98.84% | 65.55% | 98.11% | 99.75% | PASS |
+| base | 99.30% | 99.30% | 0.00 pp | 99.25% | 68.30% | 98.39% | 99.93% | PASS |
+| cpu | 98.80% | 98.80% | 0.00 pp | 98.65% | 66.92% | 97.86% | 99.87% | PASS |
+| rms | 98.98% | 98.93% | -0.05 pp | 98.88% | 65.99% | 98.34% | 99.80% | PASS |
 
-Real held-out (`data/real/test.jsonl`, 91 sessions):
+Real/curated held-out (`data/real/test.jsonl`, 85 sessions):
 
 | metric | value |
 |---|---:|
-| document accuracy | 94.51% |
-| document macro F1 | 87.74% |
-| chunk accuracy | 58.47% |
-| completion accuracy | 82.42% |
+| document accuracy | 90.59% |
+| document macro F1 | 77.57% |
+| chunk accuracy | 57.37% |
+| completion accuracy | 87.06% |
 
 The real split contains 2 `unknown` examples and mixes collected, curated and
 example sessions, so macro-F1 is not directly comparable to the synthetic
 score. These numbers are for the `cpu` checkpoint. Gate defaults:
 document accuracy `>= 0.85`, drop `<= 0.10`; `--strict` returns non-zero on
 failure.
+
+### Evaluation caveats
+
+- Real test has 85 documents. The CPU model gets **77/85** (90.59%, Wilson
+  95% 82.51–95.15%); hashed n-gram logistic regression gets **75/85**
+  (88.24%, 79.68–93.48%). McNemar exact `p = 0.625` (3 vs 1 discordant), so
+  this split does **not** establish FCN superiority over the linear baseline.
+- Real `unknown` support is only 2 documents; its per-class F1 (0.667) is not
+  a useful estimate. Per-class real-test details are in
+  `results/cpu/real_test.json`.
+- Domain-holdout runs use 4 epochs x 250 steps, while the production CPU model
+  uses 10 x 600. A full-data same-budget control scores 98.31% synthetic,
+  versus 98.95% for the production model; the held-out run at 4 x 250 reaches
+  77.34% macro. Budget is a confound, not the whole domain gap.
+- Calibration risk-coverage is measured on the **synthetic validation** split
+  (4489 documents). Real validation has only 43 documents; its ECE improves
+  from 0.109 to 0.107 but is not a reliable basis for a production reject
+  threshold.
+- The pre-clean corpus had 24 train/test duplicates (17 synthetic, 4
+  collected, 3 examples matching synthetic `real_errors`), 24 train/val
+  duplicates and 93 within-train duplicates. The current `data/mixed` is
+  deduplicated, curated commands no longer cross splits, and the model was
+  retrained; `results/cpu/split_audit.json` now reports zero exact and zero
+  command-level cross-split overlap.
+
+### Budget control
+
+The full-data same-budget control (`cpu`, 4 x 250, 3 seeds) reaches 98.31%
+synthetic versus 98.95% for the production `cpu`; the difference is about
+0.6 pp. The holdout result is therefore dominated by domain shift, although
+the holdout budget itself is still lower than production.
 
 ## Deployment
 
@@ -409,7 +431,7 @@ summaries are in `results/`; full corpora and run directories stay local.
 python -m unittest discover -s tests -v
 ```
 
-Current: **33 tests, OK**. Coverage: tokenizer budget/round-trip, digit
+Current: **34 tests, OK**. Coverage: tokenizer budget/round-trip, digit
 tokenization, chunk encoding/padding, model shapes and padded-logit safety,
 ASCII/brief/PNG, artifact layout, dynamic TFLite input (`C=1/7/100`), API
 classification, int8 validation, split profiles, real/mixed corpus contract,
@@ -506,7 +528,7 @@ data/synth/             45k synthetic corpus
 data/real/              collected + curated real sessions
 data/mixed/             synthetic + real
 examples/               usage code + logs/ + corpora/
-tools/                  real collector, curated builder, mixed builder, domain holdout
+tools/                  real collector, curated builder, mixed builder, domain holdout, split audit
 MODEL_CARD.md           intended use and failure modes
 tests/                  unittest suite
 ```

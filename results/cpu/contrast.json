@@ -3,8 +3,8 @@
   "data": "data/mixed",
   "split": "test",
   "pairs": 500,
-  "contrast_pair_acc": 0.986,
-  "verdict_change_rate": 0.992,
+  "contrast_pair_acc": 0.976,
+  "verdict_change_rate": 0.986,
   "details": [
     {
       "command": "./gradlew bootRun",
@@ -2460,8 +2460,8 @@
       "left": {
         "id": "blo-004057",
         "true": "block",
-        "predicted": "block",
-        "correct": true
+        "predicted": "fail",
+        "correct": false
       },
       "right": {
         "id": "fai-003550",
@@ -2469,8 +2469,8 @@
         "predicted": "fail",
         "correct": true
       },
-      "pair_correct": true,
-      "verdict_changed": true
+      "pair_correct": false,
+      "verdict_changed": false
     },
     {
       "command": "conda install -n vision alembic",
@@ -2478,8 +2478,8 @@
       "left": {
         "id": "blo-004057",
         "true": "block",
-        "predicted": "block",
-        "correct": true
+        "predicted": "fail",
+        "correct": false
       },
       "right": {
         "id": "suc-003837",
@@ -2487,7 +2487,7 @@
         "predicted": "success",
         "correct": true
       },
-      "pair_correct": true,
+      "pair_correct": false,
       "verdict_changed": true
     },
     {
@@ -2640,8 +2640,8 @@
       "left": {
         "id": "fai-002934",
         "true": "fail",
-        "predicted": "success",
-        "correct": false
+        "predicted": "fail",
+        "correct": true
       },
       "right": {
         "id": "suc-000149",
@@ -2649,8 +2649,8 @@
         "predicted": "success",
         "correct": true
       },
-      "pair_correct": false,
-      "verdict_changed": false
+      "pair_correct": true,
+      "verdict_changed": true
     },
     {
       "command": "convert clip.mov -resize 50% -quality 85 out.webm",
@@ -4302,10 +4302,10 @@
       "right": {
         "id": "suc-003495",
         "true": "success",
-        "predicted": "fail",
-        "correct": false
+        "predicted": "success",
+        "correct": true
       },
-      "pair_correct": false,
+      "pair_correct": true,
       "verdict_changed": true
     },
     {
@@ -4656,8 +4656,8 @@
       "left": {
         "id": "blo-001162",
         "true": "block",
-        "predicted": "block",
-        "correct": true
+        "predicted": "fail",
+        "correct": false
       },
       "right": {
         "id": "fai-000670",
@@ -4665,8 +4665,8 @@
         "predicted": "fail",
         "correct": true
       },
-      "pair_correct": true,
-      "verdict_changed": true
+      "pair_correct": false,
+      "verdict_changed": false
     },
     {
       "command": "gcloud app deploy app.yaml --quiet --project demo-42",
@@ -4674,8 +4674,8 @@
       "left": {
         "id": "blo-001162",
         "true": "block",
-        "predicted": "block",
-        "correct": true
+        "predicted": "fail",
+        "correct": false
       },
       "right": {
         "id": "suc-001427",
@@ -4683,7 +4683,7 @@
         "predicted": "success",
         "correct": true
       },
-      "pair_correct": true,
+      "pair_correct": false,
       "verdict_changed": true
     },
     {
@@ -4692,8 +4692,8 @@
       "left": {
         "id": "blo-001162",
         "true": "block",
-        "predicted": "block",
-        "correct": true
+        "predicted": "fail",
+        "correct": false
       },
       "right": {
         "id": "unk-004243",
@@ -4701,7 +4701,7 @@
         "predicted": "unknown",
         "correct": true
       },
-      "pair_correct": true,
+      "pair_correct": false,
       "verdict_changed": true
     },
     {
@@ -5184,11 +5184,11 @@
       "right": {
         "id": "suc-002034",
         "true": "success",
-        "predicted": "success",
-        "correct": true
+        "predicted": "fail",
+        "correct": false
       },
-      "pair_correct": true,
-      "verdict_changed": true
+      "pair_correct": false,
+      "verdict_changed": false
     },
     {
       "command": "git pull origin develop",
@@ -6186,8 +6186,8 @@
       "left": {
         "id": "fai-004304",
         "true": "fail",
-        "predicted": "fail",
-        "correct": true
+        "predicted": "success",
+        "correct": false
       },
       "right": {
         "id": "suc-001183",
@@ -6195,8 +6195,8 @@
         "predicted": "success",
         "correct": true
       },
-      "pair_correct": true,
-      "verdict_changed": true
+      "pair_correct": false,
+      "verdict_changed": false
     },
     {
       "command": "go build ./...",

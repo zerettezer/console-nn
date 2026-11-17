@@ -6,8 +6,10 @@ small ad-hoc format, not a general markdown parser.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import re
+from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List, Tuple
 
@@ -184,12 +186,21 @@ def parse_catalogue(text: str) -> List[Dict]:
     return docs
 
 
-def split_of(index: int) -> str:
-    if index % 10 < 7:
-        return "train"
-    if index % 10 < 8:
-        return "val"
-    return "test"
+def assign_splits(docs: List[Dict]) -> Dict[str, str]:
+    """Keep every command in exactly one split (no command template leakage)."""
+    groups = defaultdict(list)
+    for doc in docs:
+        key = doc["command"].strip().lower() or doc["id"]
+        groups[key].append(doc)
+    targets = {"train": 0.70, "val": 0.15, "test": 0.15}
+    total = len(docs)
+    counts = {name: 0 for name in targets}
+    assignment = {}
+    for key in sorted(groups, key=lambda value: hashlib.sha256(value.encode()).hexdigest()):
+        split = max(targets, key=lambda name: targets[name] * total - counts[name])
+        assignment[key] = split
+        counts[split] += len(groups[key])
+    return assignment
 
 
 def main() -> None:
@@ -206,8 +217,9 @@ def main() -> None:
         ] if path.exists() else []
         existing[split] = [row for row in rows if row.get("source") != "curated"]
     added = {"train": 0, "val": 0, "test": 0}
-    for index, doc in enumerate(docs):
-        split = split_of(index)
+    assignment = assign_splits(docs)
+    for doc in docs:
+        split = assignment[doc["command"].strip().lower() or doc["id"]]
         existing[split].append(doc)
         added[split] += 1
     for split, rows in existing.items():

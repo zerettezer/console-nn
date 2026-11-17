@@ -20,56 +20,56 @@
       "name": "cpu_control",
       "params": 138665,
       "synth_test": {
-        "accuracy_mean": 0.98296,
-        "accuracy_std": 0.00336,
-        "macro_f1_mean": 0.98119
+        "accuracy_mean": 0.98311,
+        "accuracy_std": 0.00173,
+        "macro_f1_mean": 0.98167
       },
       "real_test": {
-        "accuracy_mean": 0.90476,
-        "accuracy_std": 0.03151,
-        "macro_f1_mean": 0.78476
+        "accuracy_mean": 0.89804,
+        "accuracy_std": 0.02,
+        "macro_f1_mean": 0.78741
       },
       "runs": [
         {
           "seed": 1,
           "params": 138665,
           "synth_test": {
-            "accuracy": 0.98556,
-            "macro_f1": 0.98442,
-            "chunk_accuracy": 0.63543
+            "accuracy": 0.98177,
+            "macro_f1": 0.98069,
+            "chunk_accuracy": 0.64392
           },
           "real_test": {
-            "accuracy": 0.9011,
-            "macro_f1": 0.67186,
-            "chunk_accuracy": 0.59105
+            "accuracy": 0.90588,
+            "macro_f1": 0.79616,
+            "chunk_accuracy": 0.55916
           }
         },
         {
           "seed": 2,
           "params": 138665,
           "synth_test": {
-            "accuracy": 0.97822,
-            "macro_f1": 0.97598,
-            "chunk_accuracy": 0.65666
+            "accuracy": 0.98555,
+            "macro_f1": 0.98393,
+            "chunk_accuracy": 0.64359
           },
           "real_test": {
-            "accuracy": 0.94505,
-            "macro_f1": 0.87737,
-            "chunk_accuracy": 0.5607
+            "accuracy": 0.91765,
+            "macro_f1": 0.80363,
+            "chunk_accuracy": 0.59806
           }
         },
         {
           "seed": 3,
           "params": 138665,
           "synth_test": {
-            "accuracy": 0.98511,
-            "macro_f1": 0.98318,
-            "chunk_accuracy": 0.64826
+            "accuracy": 0.982,
+            "macro_f1": 0.9804,
+            "chunk_accuracy": 0.65429
           },
           "real_test": {
-            "accuracy": 0.86813,
-            "macro_f1": 0.80505,
-            "chunk_accuracy": 0.58626
+            "accuracy": 0.87059,
+            "macro_f1": 0.76244,
+            "chunk_accuracy": 0.54943
           }
         }
       ]
@@ -78,56 +78,56 @@
       "name": "no_digit_tokens",
       "params": 138665,
       "synth_test": {
-        "accuracy_mean": 0.98208,
-        "accuracy_std": 0.00111,
-        "macro_f1_mean": 0.98039
+        "accuracy_mean": 0.98459,
+        "accuracy_std": 0.003,
+        "macro_f1_mean": 0.9831
       },
       "real_test": {
-        "accuracy_mean": 0.88645,
-        "accuracy_std": 0.02741,
-        "macro_f1_mean": 0.81069
+        "accuracy_mean": 0.88235,
+        "accuracy_std": 0.00961,
+        "macro_f1_mean": 0.77237
       },
       "runs": [
         {
           "seed": 1,
           "params": 138665,
           "synth_test": {
-            "accuracy": 0.98356,
-            "macro_f1": 0.98218,
-            "chunk_accuracy": 0.66218
+            "accuracy": 0.98088,
+            "macro_f1": 0.97906,
+            "chunk_accuracy": 0.65479
           },
           "real_test": {
-            "accuracy": 0.87912,
-            "macro_f1": 0.81582,
-            "chunk_accuracy": 0.53502
+            "accuracy": 0.89412,
+            "macro_f1": 0.78428,
+            "chunk_accuracy": 0.54423
           }
         },
         {
           "seed": 2,
           "params": 138665,
           "synth_test": {
-            "accuracy": 0.98178,
-            "macro_f1": 0.97983,
-            "chunk_accuracy": 0.67201
+            "accuracy": 0.98822,
+            "macro_f1": 0.98726,
+            "chunk_accuracy": 0.67081
           },
           "real_test": {
-            "accuracy": 0.92308,
-            "macro_f1": 0.85363,
-            "chunk_accuracy": 0.59314
+            "accuracy": 0.88235,
+            "macro_f1": 0.76794,
+            "chunk_accuracy": 0.5967
           }
         },
         {
           "seed": 3,
           "params": 138665,
           "synth_test": {
-            "accuracy": 0.98089,
-            "macro_f1": 0.97915,
-            "chunk_accuracy": 0.66639
+            "accuracy": 0.98466,
+            "macro_f1": 0.98297,
+            "chunk_accuracy": 0.67068
           },
           "real_test": {
-            "accuracy": 0.85714,
-            "macro_f1": 0.76261,
-            "chunk_accuracy": 0.56781
+            "accuracy": 0.87059,
+            "macro_f1": 0.76489,
+            "chunk_accuracy": 0.55172
           }
         }
       ]
@@ -136,56 +136,56 @@
       "name": "no_factorized_embedding",
       "params": 232617,
       "synth_test": {
-        "accuracy_mean": 0.98067,
-        "accuracy_std": 0.00545,
-        "macro_f1_mean": 0.97899
+        "accuracy_mean": 0.98555,
+        "accuracy_std": 0.00119,
+        "macro_f1_mean": 0.98449
       },
       "real_test": {
-        "accuracy_mean": 0.91575,
-        "accuracy_std": 0.01036,
-        "macro_f1_mean": 0.82734
+        "accuracy_mean": 0.8902,
+        "accuracy_std": 0.00555,
+        "macro_f1_mean": 0.79661
       },
       "runs": [
         {
           "seed": 1,
           "params": 232617,
           "synth_test": {
-            "accuracy": 0.98711,
-            "macro_f1": 0.9859,
-            "chunk_accuracy": 0.6446
+            "accuracy": 0.98533,
+            "macro_f1": 0.9841,
+            "chunk_accuracy": 0.64859
           },
           "real_test": {
-            "accuracy": 0.92308,
-            "macro_f1": 0.81686,
-            "chunk_accuracy": 0.53514
+            "accuracy": 0.89412,
+            "macro_f1": 0.82797,
+            "chunk_accuracy": 0.58509
           }
         },
         {
           "seed": 2,
           "params": 232617,
           "synth_test": {
-            "accuracy": 0.98111,
-            "macro_f1": 0.97885,
-            "chunk_accuracy": 0.66119
+            "accuracy": 0.98422,
+            "macro_f1": 0.98314,
+            "chunk_accuracy": 0.65041
           },
           "real_test": {
-            "accuracy": 0.92308,
-            "macro_f1": 0.85738,
-            "chunk_accuracy": 0.57668
+            "accuracy": 0.88235,
+            "macro_f1": 0.77307,
+            "chunk_accuracy": 0.57374
           }
         },
         {
           "seed": 3,
           "params": 232617,
           "synth_test": {
-            "accuracy": 0.97378,
-            "macro_f1": 0.97222,
-            "chunk_accuracy": 0.65182
+            "accuracy": 0.98711,
+            "macro_f1": 0.98622,
+            "chunk_accuracy": 0.65869
           },
           "real_test": {
-            "accuracy": 0.9011,
-            "macro_f1": 0.80779,
-            "chunk_accuracy": 0.58147
+            "accuracy": 0.89412,
+            "macro_f1": 0.7888,
+            "chunk_accuracy": 0.58347
           }
         }
       ]
@@ -194,14 +194,14 @@
   "reference": {
     "name": "cpu",
     "synth_test": {
-      "accuracy": 0.99333,
-      "macro_f1": 0.99326,
-      "chunk_accuracy": 0.67278
+      "accuracy": 0.98955,
+      "macro_f1": 0.98834,
+      "chunk_accuracy": 0.66939
     },
     "real_test": {
-      "accuracy": 0.94505,
-      "macro_f1": 0.87737,
-      "chunk_accuracy": 0.58466
+      "accuracy": 0.90588,
+      "macro_f1": 0.7757,
+      "chunk_accuracy": 0.57374
     }
   }
 }

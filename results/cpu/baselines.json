@@ -14,22 +14,22 @@
     "name": "regex",
     "params": 0,
     "synth_test": {
-      "accuracy": 0.67378,
-      "macro_f1": 0.56623,
-      "weighted_f1": 0.62374,
-      "n": 4500,
+      "accuracy": 0.67393,
+      "macro_f1": 0.56633,
+      "weighted_f1": 0.62385,
+      "n": 4499,
       "per_class": {
         "success": {
-          "precision": 0.55404,
+          "precision": 0.55429,
           "recall": 0.78085,
-          "f1": 0.64817,
+          "f1": 0.64835,
           "support": 1556
         },
         "fail": {
           "precision": 0.73706,
-          "recall": 0.83741,
-          "f1": 0.78403,
-          "support": 1513
+          "recall": 0.83796,
+          "f1": 0.78428,
+          "support": 1512
         },
         "block": {
           "precision": 0.93857,
@@ -52,7 +52,7 @@
           0
         ],
         [
-          208,
+          207,
           1267,
           36,
           2
@@ -79,28 +79,28 @@
       "params": 0
     },
     "real_test": {
-      "accuracy": 0.82418,
-      "macro_f1": 0.60481,
-      "weighted_f1": 0.81006,
-      "n": 91,
+      "accuracy": 0.84706,
+      "macro_f1": 0.62509,
+      "weighted_f1": 0.83389,
+      "n": 85,
       "per_class": {
         "success": {
-          "precision": 0.75,
-          "recall": 0.96,
-          "f1": 0.84211,
-          "support": 25
+          "precision": 0.78125,
+          "recall": 0.96154,
+          "f1": 0.86207,
+          "support": 26
         },
         "fail": {
-          "precision": 0.84,
-          "recall": 0.875,
-          "f1": 0.85714,
-          "support": 48
+          "precision": 0.86667,
+          "recall": 0.88636,
+          "f1": 0.8764,
+          "support": 44
         },
         "block": {
           "precision": 1.0,
-          "recall": 0.5625,
-          "f1": 0.72,
-          "support": 16
+          "recall": 0.61538,
+          "f1": 0.7619,
+          "support": 13
         },
         "unknown": {
           "precision": 0.0,
@@ -111,21 +111,21 @@
       },
       "confusion_matrix": [
         [
-          24,
+          25,
           1,
           0,
           0
         ],
         [
-          6,
-          42,
+          5,
+          39,
           0,
           0
         ],
         [
           0,
-          7,
-          9,
+          5,
+          8,
           0
         ],
         [
@@ -149,15 +149,15 @@
     "buckets": 8192,
     "params": 32772,
     "synth_test": {
-      "accuracy_mean": 0.96704,
+      "accuracy_mean": 0.96792,
       "accuracy_std": 0.0001,
-      "macro_f1_mean": 0.96537,
-      "macro_f1_std": 7e-05
+      "macro_f1_mean": 0.96637,
+      "macro_f1_std": 8e-05
     },
     "real_test": {
-      "accuracy_mean": 0.93407,
+      "accuracy_mean": 0.88235,
       "accuracy_std": 0.0,
-      "macro_f1_mean": 0.86969,
+      "macro_f1_mean": 0.74614,
       "macro_f1_std": 0.0
     },
     "runs": [
@@ -165,27 +165,27 @@
         "seed": 1,
         "params": 32772,
         "synth_test": {
-          "accuracy": 0.96711,
-          "macro_f1": 0.96543,
-          "weighted_f1": 0.96703,
-          "n": 4500,
+          "accuracy": 0.96799,
+          "macro_f1": 0.96643,
+          "weighted_f1": 0.9679,
+          "n": 4499,
           "per_class": {
             "success": {
-              "precision": 0.9453,
-              "recall": 0.98843,
-              "f1": 0.96638,
+              "precision": 0.9476,
+              "recall": 0.98779,
+              "f1": 0.96728,
               "support": 1556
             },
             "fail": {
-              "precision": 0.97605,
-              "recall": 0.9696,
-              "f1": 0.97281,
-              "support": 1513
+              "precision": 0.97478,
+              "recall": 0.97156,
+              "f1": 0.97317,
+              "support": 1512
             },
             "block": {
-              "precision": 0.98069,
-              "recall": 0.96735,
-              "f1": 0.97397,
+              "precision": 0.98345,
+              "recall": 0.97007,
+              "f1": 0.97671,
               "support": 735
             },
             "unknown": {
@@ -197,26 +197,26 @@
           },
           "confusion_matrix": [
             [
-              1538,
-              15,
+              1537,
+              16,
               0,
               3
             ],
             [
-              28,
-              1467,
-              13,
+              27,
+              1469,
+              11,
               5
             ],
             [
-              8,
+              6,
               15,
-              711,
+              713,
               1
             ],
             [
-              53,
-              6,
+              52,
+              7,
               1,
               636
             ]
@@ -229,54 +229,54 @@
           ]
         },
         "real_test": {
-          "accuracy": 0.93407,
-          "macro_f1": 0.86969,
-          "weighted_f1": 0.93248,
-          "n": 91,
+          "accuracy": 0.88235,
+          "macro_f1": 0.74614,
+          "weighted_f1": 0.88702,
+          "n": 85,
           "per_class": {
             "success": {
               "precision": 0.95833,
-              "recall": 0.92,
-              "f1": 0.93878,
-              "support": 25
+              "recall": 0.88462,
+              "f1": 0.92,
+              "support": 26
             },
             "fail": {
-              "precision": 0.90385,
-              "recall": 0.97917,
-              "f1": 0.94,
-              "support": 48
+              "precision": 0.875,
+              "recall": 0.95455,
+              "f1": 0.91304,
+              "support": 44
             },
             "block": {
               "precision": 1.0,
-              "recall": 0.875,
-              "f1": 0.93333,
-              "support": 16
+              "recall": 0.69231,
+              "f1": 0.81818,
+              "support": 13
             },
             "unknown": {
-              "precision": 1.0,
+              "precision": 0.25,
               "recall": 0.5,
-              "f1": 0.66667,
+              "f1": 0.33333,
               "support": 2
             }
           },
           "confusion_matrix": [
             [
               23,
-              2,
+              3,
               0,
               0
             ],
             [
               1,
-              47,
+              42,
               0,
-              0
+              1
             ],
             [
               0,
               2,
-              14,
-              0
+              9,
+              2
             ],
             [
               0,
@@ -297,27 +297,27 @@
         "seed": 2,
         "params": 32772,
         "synth_test": {
-          "accuracy": 0.96711,
-          "macro_f1": 0.96542,
-          "weighted_f1": 0.96702,
-          "n": 4500,
+          "accuracy": 0.96777,
+          "macro_f1": 0.96626,
+          "weighted_f1": 0.96768,
+          "n": 4499,
           "per_class": {
             "success": {
-              "precision": 0.94588,
-              "recall": 0.98843,
-              "f1": 0.96669,
+              "precision": 0.94756,
+              "recall": 0.98715,
+              "f1": 0.96695,
               "support": 1556
             },
             "fail": {
-              "precision": 0.9754,
-              "recall": 0.9696,
-              "f1": 0.97249,
-              "support": 1513
+              "precision": 0.97414,
+              "recall": 0.97156,
+              "f1": 0.97285,
+              "support": 1512
             },
             "block": {
-              "precision": 0.98069,
-              "recall": 0.96735,
-              "f1": 0.97397,
+              "precision": 0.98345,
+              "recall": 0.97007,
+              "f1": 0.97671,
               "support": 735
             },
             "unknown": {
@@ -329,26 +329,26 @@
           },
           "confusion_matrix": [
             [
-              1538,
-              15,
+              1536,
+              17,
               0,
               3
             ],
             [
-              28,
-              1467,
-              13,
+              27,
+              1469,
+              11,
               5
             ],
             [
-              7,
-              16,
-              711,
+              6,
+              15,
+              713,
               1
             ],
             [
-              53,
-              6,
+              52,
+              7,
               1,
               636
             ]
@@ -361,54 +361,54 @@
           ]
         },
         "real_test": {
-          "accuracy": 0.93407,
-          "macro_f1": 0.86969,
-          "weighted_f1": 0.93248,
-          "n": 91,
+          "accuracy": 0.88235,
+          "macro_f1": 0.74614,
+          "weighted_f1": 0.88702,
+          "n": 85,
           "per_class": {
             "success": {
               "precision": 0.95833,
-              "recall": 0.92,
-              "f1": 0.93878,
-              "support": 25
+              "recall": 0.88462,
+              "f1": 0.92,
+              "support": 26
             },
             "fail": {
-              "precision": 0.90385,
-              "recall": 0.97917,
-              "f1": 0.94,
-              "support": 48
+              "precision": 0.875,
+              "recall": 0.95455,
+              "f1": 0.91304,
+              "support": 44
             },
             "block": {
               "precision": 1.0,
-              "recall": 0.875,
-              "f1": 0.93333,
-              "support": 16
+              "recall": 0.69231,
+              "f1": 0.81818,
+              "support": 13
             },
             "unknown": {
-              "precision": 1.0,
+              "precision": 0.25,
               "recall": 0.5,
-              "f1": 0.66667,
+              "f1": 0.33333,
               "support": 2
             }
           },
           "confusion_matrix": [
             [
               23,
-              2,
+              3,
               0,
               0
             ],
             [
               1,
-              47,
+              42,
               0,
-              0
+              1
             ],
             [
               0,
               2,
-              14,
-              0
+              9,
+              2
             ],
             [
               0,
@@ -429,27 +429,27 @@
         "seed": 3,
         "params": 32772,
         "synth_test": {
-          "accuracy": 0.96689,
-          "macro_f1": 0.96527,
-          "weighted_f1": 0.96681,
-          "n": 4500,
+          "accuracy": 0.96799,
+          "macro_f1": 0.96643,
+          "weighted_f1": 0.9679,
+          "n": 4499,
           "per_class": {
             "success": {
-              "precision": 0.94472,
-              "recall": 0.98843,
-              "f1": 0.96608,
+              "precision": 0.9476,
+              "recall": 0.98779,
+              "f1": 0.96728,
               "support": 1556
             },
             "fail": {
-              "precision": 0.97603,
-              "recall": 0.96894,
-              "f1": 0.97247,
-              "support": 1513
+              "precision": 0.97478,
+              "recall": 0.97156,
+              "f1": 0.97317,
+              "support": 1512
             },
             "block": {
-              "precision": 0.98069,
-              "recall": 0.96735,
-              "f1": 0.97397,
+              "precision": 0.98345,
+              "recall": 0.97007,
+              "f1": 0.97671,
               "support": 735
             },
             "unknown": {
@@ -461,26 +461,26 @@
           },
           "confusion_matrix": [
             [
-              1538,
-              15,
+              1537,
+              16,
               0,
               3
             ],
             [
-              29,
-              1466,
-              13,
+              27,
+              1469,
+              11,
               5
             ],
             [
-              8,
+              6,
               15,
-              711,
+              713,
               1
             ],
             [
-              53,
-              6,
+              52,
+              7,
               1,
               636
             ]
@@ -493,54 +493,54 @@
           ]
         },
         "real_test": {
-          "accuracy": 0.93407,
-          "macro_f1": 0.86969,
-          "weighted_f1": 0.93248,
-          "n": 91,
+          "accuracy": 0.88235,
+          "macro_f1": 0.74614,
+          "weighted_f1": 0.88702,
+          "n": 85,
           "per_class": {
             "success": {
               "precision": 0.95833,
-              "recall": 0.92,
-              "f1": 0.93878,
-              "support": 25
+              "recall": 0.88462,
+              "f1": 0.92,
+              "support": 26
             },
             "fail": {
-              "precision": 0.90385,
-              "recall": 0.97917,
-              "f1": 0.94,
-              "support": 48
+              "precision": 0.875,
+              "recall": 0.95455,
+              "f1": 0.91304,
+              "support": 44
             },
             "block": {
               "precision": 1.0,
-              "recall": 0.875,
-              "f1": 0.93333,
-              "support": 16
+              "recall": 0.69231,
+              "f1": 0.81818,
+              "support": 13
             },
             "unknown": {
-              "precision": 1.0,
+              "precision": 0.25,
               "recall": 0.5,
-              "f1": 0.66667,
+              "f1": 0.33333,
               "support": 2
             }
           },
           "confusion_matrix": [
             [
               23,
-              2,
+              3,
               0,
               0
             ],
             [
               1,
-              47,
+              42,
               0,
-              0
+              1
             ],
             [
               0,
               2,
-              14,
-              0
+              9,
+              2
             ],
             [
               0,
@@ -563,12 +563,12 @@
     "name": "cpu",
     "params": 138665,
     "synth_test": {
-      "accuracy": 0.99333,
-      "macro_f1": 0.99326
+      "accuracy": 0.98955,
+      "macro_f1": 0.98834
     },
     "real_test": {
-      "accuracy": 0.94505,
-      "macro_f1": 0.87737
+      "accuracy": 0.90588,
+      "macro_f1": 0.7757
     }
   }
 }

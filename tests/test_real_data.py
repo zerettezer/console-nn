@@ -1,6 +1,7 @@
 """Real-data collection and mixed-corpus contract."""
 from __future__ import annotations
 
+import hashlib
 import json
 import unittest
 from pathlib import Path
@@ -43,6 +44,28 @@ class RealDataTest(unittest.TestCase):
                     sources.add(json.loads(line)["source"])
         self.assertIn("curated", sources)
         self.assertNotRegex(text, r"/home/(?!dev(?:/|\b))")
+
+    def test_mixed_has_no_exact_cross_split_duplicates(self):
+        def signature(doc):
+            text = "\n".join(
+                line["text"].strip().lower() for line in doc["lines"]
+            )
+            return hashlib.sha256(
+                (str(doc.get("command", "")) + "\n" + text).encode()
+            ).hexdigest()
+
+        splits = {}
+        for split in ("train", "val", "test"):
+            splits[split] = {
+                signature(json.loads(line))
+                for line in (ROOT / "data" / "mixed" / f"{split}.jsonl")
+                .read_text()
+                .splitlines()
+                if line.strip()
+            }
+        self.assertFalse(splits["train"] & splits["test"])
+        self.assertFalse(splits["val"] & splits["test"])
+        self.assertFalse(splits["train"] & splits["val"])
 
     def test_no_exit_code_literals(self):
         for split in ("train", "val", "test"):

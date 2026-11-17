@@ -1,0 +1,65 @@
+{
+  "sizes": {
+    "train": 36105,
+    "val": 4532,
+    "test": 4584
+  },
+  "exact": {
+    "train_test": 0,
+    "val_test": 0,
+    "train_val": 0,
+    "within_train": 0,
+    "within_val": 0,
+    "within_test": 0
+  },
+  "by_source": {
+    "synthetic": {
+      "sizes": {
+        "train": 35870,
+        "val": 4489,
+        "test": 4499
+      },
+      "train_test_exact": 0
+    },
+    "real": {
+      "sizes": {
+        "train": 133,
+        "val": 20,
+        "test": 40
+      },
+      "train_test_exact": 0
+    },
+    "curated": {
+      "sizes": {
+        "train": 102,
+        "val": 23,
+        "test": 22
+      },
+      "train_test_exact": 0
+    },
+    "real_user": {
+      "sizes": {
+        "train": 0,
+        "val": 0,
+        "test": 23
+      },
+      "train_test_exact": 0
+    }
+  },
+  "command_overlap": {
+    "real": {
+      "test_documents_with_train_command": 0,
+      "test_documents": 40,
+      "pairs": {}
+    },
+    "curated": {
+      "test_documents_with_train_command": 0,
+      "test_documents": 22,
+      "pairs": {}
+    }
+  },
+  "example_vs_synthetic_real_errors": {
+    "examples": 23,
+    "exact_matches": 0
+  }
+}

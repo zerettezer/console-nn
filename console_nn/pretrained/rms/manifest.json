@@ -1,21 +1,21 @@
 {
   "format": 1,
-  "model_dir": "artifacts/rms/model",
+  "model_dir": "console_nn/pretrained/rms",
   "files": {
     "config.json": {
-      "sha256": "d3e74987b2d8a02ca5b17a30d9e0dd6b5e3cb98581aa257c701e5f62b5cba486",
-      "bytes": 3948
+      "sha256": "4e33ee1946f47e95bb2781b1d526930390bcab2f861d7bf8a2098f8b05a452a4",
+      "bytes": 4395
     },
     "tokenizer.json": {
-      "sha256": "0c838a44ce8b52498a6785ce3be0828873f1994207da4245206eceebeefbe410",
-      "bytes": 41831
+      "sha256": "3acc7c2376db7647618389f89758aba99f3475f674e0046dfbcd5289fd253fbf",
+      "bytes": 41141
     },
     "weights.h5": {
-      "sha256": "4cbc940dd8c23092f6de7b2dd1d0b978958529adf2eea7f1b84ec2fd7c21cf6e",
+      "sha256": "a3049d71df219df4c1a633b4fc3c2b459d114705f44d64de2d7153b8342a04d2",
       "bytes": 697344
     },
     "model_int8.tflite": {
-      "sha256": "d588bf981f728de0a6e082418c27af397507f3613aeabe5da8c09a4a40b302bc",
+      "sha256": "91fd8393371485c23f22fb2958c46f821aeda52a0198a2ab673d06948fbd1885",
       "bytes": 224968
     }
   },

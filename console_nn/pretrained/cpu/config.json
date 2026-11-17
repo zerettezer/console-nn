@@ -127,7 +127,7 @@
     "batch_windows": 1,
     "tflite_threads": 4,
     "benchmark_chunks": 128,
-    "doc_temperature": 0.802088,
+    "doc_temperature": 1.08461,
     "doc_aggregate": "mean",
     "color": "auto",
     "bar_width": 24,
